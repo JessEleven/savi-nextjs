@@ -1,0 +1,41 @@
+{
+  "name": "savi-nextjs",
+  "description": "Save your json and share them instantly.",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 1198",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "dev-2": "cross-env NODE_NO_WARNINGS=1 next dev -p 1198"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "next": "14.2.4",
+    "postcss": "^8.5.3",
+    "react": "18",
+    "react-dom": "18",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "standard": "17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "author": {
+    "name": "Jesús Rengifo Mendoza",
+    "url": "https://github.com/JessEleven"
+  },
+  "license": "MIT",
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ],
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
