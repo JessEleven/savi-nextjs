@@ -1,17 +1,26 @@
 {
   "name": "savi-nextjs",
   "description": "Save your json and share them instantly.",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 1198",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev-2": "cross-env NODE_NO_WARNINGS=1 next dev -p 1198"
+    "dev-2": "cross-env NODE_NO_WARNINGS=1 next dev -p 1198",
+    "secret": "npx @better-auth/cli@latest secret",
+    "db:dev": "npx drizzle-kit push",
+    "db:prod": "npx drizzle-kit push --config drizzle.config.prod.js",
+    "db:studio": "npx drizzle-kit studio",
+    "db:schema": "npx @better-auth/cli generate --config src/libs/auth.js"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.0.0",
     "@tailwindcss/postcss": "^4.1.7",
+    "better-auth": "1.2.8",
+    "dotenv": "16.5.0",
+    "drizzle-orm": "0.43.1",
     "next": "14.2.4",
     "postcss": "^8.5.3",
     "react": "18",
@@ -20,6 +29,8 @@
   },
   "devDependencies": {
     "cross-env": "7.0.3",
+    "drizzle-kit": "0.31.1",
+    "pg": "8.16.0",
     "standard": "17.1.2"
   },
   "eslintConfig": {
