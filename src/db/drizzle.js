@@ -1,11 +1,11 @@
-export async function getDb () {
-  const isProd = process.env.NODE_ENV === 'production'
+import { config } from 'dotenv'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Pool } from 'pg'
+import * as schema from './schema'
 
-  if (isProd) {
-    const { db } = await import('../libs/config/drizzle.prod.js')
-    return db
-  } else {
-    const { db } = await import('../libs/config/drizzle.dev.js')
-    return db
-  }
-}
+config({ path: '.env.local' })
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+})
+export const db = drizzle(pool, { schema })
