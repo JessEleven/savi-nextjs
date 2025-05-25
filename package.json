@@ -1,7 +1,7 @@
 {
   "name": "savi-nextjs",
   "description": "Save your json and share them instantly.",
-  "version": "0.1.1",
+  "version": "0.3.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 1198",
@@ -19,6 +19,7 @@
     "@neondatabase/serverless": "1.0.0",
     "@tailwindcss/postcss": "^4.1.7",
     "better-auth": "1.2.8",
+    "clsx": "2.1.1",
     "dotenv": "16.5.0",
     "drizzle-orm": "0.43.1",
     "next": "14.2.4",

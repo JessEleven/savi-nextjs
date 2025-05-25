@@ -3,6 +3,7 @@ import AppLogo from './ui/app-logo'
 import SignOut from './ui/sign-out'
 import { headers } from 'next/headers'
 import { auth } from '@/libs/auth'
+import { GitHubIcon } from '@/resources/assets/main-icons'
 
 export default async function Nav () {
   let session = null
@@ -19,7 +20,7 @@ export default async function Nav () {
     <header className='mx:5 md:mx-14'>
       <div className='h-[60px] flex items-center justify-between'>
         <Link translate='no' href='/'>
-          <AppLogo />
+          <AppLogo size={24} showText />
         </Link>
 
         <nav>
@@ -32,7 +33,7 @@ export default async function Nav () {
                 target='_blank'
                 aria-label='GitHub repository'
               >
-                🟢
+                <GitHubIcon />
               </a>
             </li>
 
