@@ -27,7 +27,7 @@ export default async function Nav () {
           <ul className='hidden md:flex md:items-center md:gap-x-2 list-none'>
             <li>
               <a
-                className='hover-icon block'
+                className='btn-border-icon block'
                 href='https://github.com/JessEleven/savi-nextjs'
                 rel='noreferrer'
                 target='_blank'
@@ -41,12 +41,12 @@ export default async function Nav () {
               ? (
                 <>
                   <li>
-                    <Link href='/ovw' className='btn-bg block'>
-                      Overview
+                    <Link href='/dash' className='btn-bg block'>
+                      Dashboard
                     </Link>
                   </li>
                   <li>
-                    <SignOut text='Sign Out' />
+                    <SignOut text />
                   </li>
                 </>
                 )

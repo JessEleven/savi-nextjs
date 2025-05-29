@@ -1,5 +1,5 @@
 import { auth } from '@/libs/auth'
-import clsx from 'clsx'
+import { LogoutIcon } from '@/resources/assets/main-icons'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -11,19 +11,24 @@ async function handleSignOut () {
   redirect('/sign-in')
 }
 
-export default function SignOut ({ icon, text, onText }) {
-  const classes = clsx({
-    'ovw-border p-[7px]': icon && !text,
-    'ovw-btn-hover py-[9px]': text && !icon,
-    'flex items-center gap-x-1.5 ovw-btn-hover': icon && onText
-  })
-
+export default function SignOut ({ icon = false, text = false, both = false }) {
   return (
     <form action={handleSignOut}>
-      <button type='submit' className={`${classes} cursor-pointer font-medium`}>
-        {icon}
-        {icon && <span>{onText}</span>}
-        {text}
+      <button type='submit' className='flex cursor-pointer font-medium'>
+        {icon && (
+          <div className='btn-border-icon'>
+            <LogoutIcon />
+          </div>
+        )}
+        {text && (
+          <span className='btn-border py-2'>Sign Out</span>
+        )}
+        {both && (
+          <div className='flex items-center gap-x-1.5 btn-border py-[7px]'>
+            <LogoutIcon />
+            <span>Sign Out</span>
+          </div>
+        )}
       </button>
     </form>
   )
