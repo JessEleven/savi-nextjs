@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .btn-bg {
-  @apply px-4 py-[9px] rounded-[5px] text-sm text-neutral-900 font-medium duration-200 ease-in-out 
+  @apply px-4 py-[9px] rounded-[5px] text-sm text-neutral-900 duration-200 ease-in-out 
   transition-colors bg-neutral-100 hover:bg-neutral-200/85 leading-3.5
 }
 
@@ -16,6 +16,11 @@
 }
 
 .btn-border {
-  @apply px-4 rounded-[5px] text-sm border border-neutral-100 hover:bg-neutral-500/40 
+  @apply px-4 rounded-[5px] text-sm border border-neutral-600 hover:bg-neutral-500/40 hover:border-neutral-500
   transition-colors duration-200 ease-in-out leading-3.5
+}
+
+.editor-btn {
+  @apply flex items-center gap-x-1 px-3 py-2 rounded-md cursor-pointer
+  transition-colors duration-200 ease-in-out bg-stone-600 hover:bg-stone-600/75
 }

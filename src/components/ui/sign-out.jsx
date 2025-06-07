@@ -14,7 +14,7 @@ async function handleSignOut () {
 export default function SignOut ({ icon = false, text = false, both = false }) {
   return (
     <form action={handleSignOut}>
-      <button type='submit' className='flex cursor-pointer font-medium'>
+      <button type='submit' className='flex cursor-pointer'>
         {icon && (
           <div className='btn-border-icon'>
             <LogoutIcon />

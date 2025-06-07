@@ -1,7 +1,7 @@
 {
   "name": "savi-nextjs",
   "description": "Save your json and share them instantly.",
-  "version": "0.4.2",
+  "version": "0.5.2",
   "private": true,
   "scripts": {
     "dev": "next dev -p 1198",
@@ -15,6 +15,7 @@
     "db:schema": "npx @better-auth/cli generate --config src/libs/auth.js"
   },
   "dependencies": {
+    "@monaco-editor/react": "4.7.0",
     "@tailwindcss/postcss": "^4.1.7",
     "better-auth": "1.2.8",
     "dotenv": "16.5.0",
