@@ -1,4 +1,5 @@
-import { pgTable, text, timestamp, boolean } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
+import { pgTable, text, timestamp, boolean, uuid, jsonb } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -46,4 +47,22 @@ export const verification = pgTable('verification', {
   updatedAt: timestamp('updated_at')
 })
 
-export const schema = { user, session, account, verification }
+export const jsonStorage = pgTable('json_storage', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  fileName: text('file_name').notNull(),
+  fileContent: jsonb('file_content').notNull(),
+  favorite: boolean('favorite').default(false).notNull(),
+  userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow()
+})
+
+export const schema = { user, session, account, verification, jsonStorage }
+
+export const usersRelated = relations(user, ({ many }) => ({
+  storage: many(jsonStorage)
+}))
+
+export const jsonStorageRelated = relations(jsonStorage, ({ one }) => ({
+  user: one(user, { fields: [jsonStorage.userId], references: [user.id] })
+}))
