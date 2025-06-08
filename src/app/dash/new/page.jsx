@@ -1,15 +1,42 @@
 'use client'
 
-import { Editor, loader } from '@monaco-editor/react'
+import Editor, { loader } from '@monaco-editor/react'
 import Link from 'next/link'
 import { LoaderIcon } from '../assets/dash-icons'
 import { useEffect, useRef, useState } from 'react'
 import EditorOptions from '../components-dash/editor-options'
 import UploadFile from '../components-dash/upload-file'
+import { createJsonStorage } from '@/libs/api/json-storage'
+import { useRouter } from 'next/navigation'
 
 export default function NewPage () {
   const [isFocused, setIsFocused] = useState(false)
+  const [formData, setFormData] = useState({
+    fileName: '', fileContent: ''
+  })
   const editorRef = useRef(null)
+  const router = useRouter()
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const content = editorRef.current?.getValue()
+    const parsed = JSON.parse(content)
+
+    try {
+      await createJsonStorage({
+        ...formData,
+        fileContent: parsed
+      })
+      router.push('/dash')
+    } catch (error) {
+      console.error('Unexpected error:', error)
+    }
+  }
 
   useEffect(() => {
     loader.init().then(monaco => {
@@ -38,14 +65,16 @@ export default function NewPage () {
           Create or upload a JSON file
         </h3>
 
-        <form className='mt-5 text-sm'>
+        <form onSubmit={handleSubmit} className='mt-5 text-sm'>
           <div className='flex flex-col'>
-            <label htmlFor='name'>File name</label>
+            <label htmlFor='fileName'>File name</label>
             <input
-              id='name'
-              className='mt-1.5 mb-5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-md px-4 py-1.5 font-normal'
+              id='fileName'
               type='text'
+              name='fileName'
+              className='mt-1.5 mb-5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-md px-4 py-1.5 font-normal'
               placeholder='e.g. First file, New file...'
+              onChange={handleChange}
             />
           </div>
 
@@ -60,6 +89,10 @@ export default function NewPage () {
 
             <div className={`rounded-md overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
               <Editor
+                name='fileContent'
+                onChange={(value) => {
+                  setFormData({ ...formData, fileContent: value })
+                }}
                 height='400px'
                 defaultLanguage='json'
                 theme='custom-vs-dark'
