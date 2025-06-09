@@ -61,7 +61,7 @@ export default function NewPage () {
 
   return (
     <main className='mt-5 mb-10'>
-      <article className='flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
+      <article className='card-container'>
         <h3 className='text-transparent bg-clip-text bg-linear-30 from-rose-400 via-cyan-400 font-medium text-2xl'>
           Create or upload a JSON file
         </h3>

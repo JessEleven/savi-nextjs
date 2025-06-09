@@ -11,8 +11,8 @@
 }
 
 .btn-border-icon {
-  @apply p-[7px] border border-neutral-500 rounded-[5px] hover:bg-neutral-500/40 
-  transition-colors duration-200 ease-in-out
+  @apply p-[7px] border border-neutral-600 rounded-[5px] hover:bg-stone-600
+  transition-colors duration-200 ease-in-out cursor-pointer
 }
 
 .btn-border {
@@ -23,4 +23,8 @@
 .editor-btn {
   @apply flex items-center gap-x-1 px-3 py-2 rounded-[5px] cursor-pointer
   transition-colors duration-200 ease-in-out bg-stone-600 hover:bg-stone-600/75
+}
+
+.card-container {
+  @apply flex flex-col gap-y-2.5 mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]
 }

@@ -1,5 +1,22 @@
 import { authClient } from '../auth-client'
 
+export const getAllJsonStorage = async () => {
+  try {
+    const response = await fetch('/api/json-storage', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    const result = await response.json()
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to fetch JSON storages')
+    }
+    return result.data
+  } catch (error) {
+    return error.message
+  }
+}
+
 export const createJsonStorage = async (formData) => {
   try {
     const { data } = await authClient.getSession()
