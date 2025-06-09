@@ -17,54 +17,52 @@ export default async function Nav () {
   }
 
   return (
-    <header className='mx:5 md:mx-14'>
-      <div className='h-[60px] flex items-center justify-between'>
-        <Link translate='no' href='/'>
-          <AppLogo size={24} showText />
-        </Link>
+    <header className='h-[60px] flex items-center justify-between'>
+      <Link translate='no' href='/'>
+        <AppLogo size={24} showText />
+      </Link>
 
-        <nav>
-          <ul className='hidden md:flex md:items-center md:gap-x-2 list-none'>
-            <li>
-              <a
-                className='btn-border-icon block'
-                href='https://github.com/JessEleven/savi-nextjs'
-                rel='noreferrer'
-                target='_blank'
-                aria-label='GitHub repository'
-              >
-                <GitHubIcon />
-              </a>
-            </li>
+      <nav>
+        <ul className='hidden md:flex md:items-center md:gap-x-2 list-none'>
+          <li>
+            <a
+              className='btn-border-icon block'
+              href='https://github.com/JessEleven/savi-nextjs'
+              rel='noreferrer'
+              target='_blank'
+              aria-label='GitHub repository'
+            >
+              <GitHubIcon />
+            </a>
+          </li>
 
-            {session
-              ? (
-                <>
-                  <li>
-                    <Link href='/dash' className='btn-bg block'>
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <SignOut text />
-                  </li>
-                </>
-                )
-              : (
-                <>
-                  <li>
-                    <Link href='/sign-in' className='btn-bg block'>
-                      Sign In
-                    </Link>
-                  </li>
-                </>
-                )}
-          </ul>
-        </nav>
+          {session
+            ? (
+              <>
+                <li>
+                  <Link href='/dash' className='btn-bg block'>
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <SignOut text />
+                </li>
+              </>
+              )
+            : (
+              <>
+                <li>
+                  <Link href='/sign-in' className='btn-bg block'>
+                    Sign In
+                  </Link>
+                </li>
+              </>
+              )}
+        </ul>
+      </nav>
 
-        <div className='block md:hidden'>
-          ❌
-        </div>
+      <div className='block md:hidden'>
+        ❌
       </div>
     </header>
   )

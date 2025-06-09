@@ -1,28 +1,11 @@
-import { EraserIcon, FileIcon } from '../assets/dash-icons'
+import Clean from './ui/clean'
+import Format from './ui/format'
 
 export default function EditorOptions ({ handleFormat, editorRef }) {
   return (
-    <div className='flex items-center gap-x-2.5 leading-3.5'>
-      <button
-        type='button'
-        onClick={handleFormat}
-        className='editor-btn'
-      >
-        <FileIcon />
-        <span>Format</span>
-      </button>
-      <button
-        type='button'
-        onClick={() => {
-          if (editorRef.current) {
-            editorRef.current.setValue('')
-          }
-        }}
-        className='editor-btn'
-      >
-        <EraserIcon />
-        <span>Clean</span>
-      </button>
+    <div className='hidden md:flex items-center gap-x-2.5 leading-3.5'>
+      <Format handleFormat={handleFormat} responsiveMode='md' />
+      <Clean editorRef={editorRef} responsiveMode='md' />
     </div>
   )
 }

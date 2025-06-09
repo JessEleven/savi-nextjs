@@ -8,6 +8,7 @@ import EditorOptions from '../components-dash/editor-options'
 import UploadFile from '../components-dash/upload-file'
 import { createJsonStorage } from '@/libs/api/json-storage'
 import { useRouter } from 'next/navigation'
+import EditorOpDropdown from '../components-dash/editor-op-dropdown'
 
 export default function NewPage () {
   const [isFocused, setIsFocused] = useState(false)
@@ -59,8 +60,8 @@ export default function NewPage () {
   }
 
   return (
-    <main className='mt-5'>
-      <article className='flex flex-col mx-auto h-fit p-6 w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
+    <main className='mt-5 mb-10'>
+      <article className='flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
         <h3 className='text-transparent bg-clip-text bg-linear-30 from-rose-400 via-cyan-400 font-medium text-2xl'>
           Create or upload a JSON file
         </h3>
@@ -72,7 +73,7 @@ export default function NewPage () {
               id='fileName'
               type='text'
               name='fileName'
-              className='mt-1.5 mb-5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-md px-4 py-1.5 font-normal'
+              className='mt-1.5 mb-5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-[5px] px-4 py-1.5 font-normal'
               placeholder='e.g. First file, New file...'
               onChange={handleChange}
             />
@@ -84,16 +85,17 @@ export default function NewPage () {
                 handleFormat={handleFormat}
                 editorRef={editorRef}
               />
+              <EditorOpDropdown />
               <UploadFile editorRef={editorRef} />
             </div>
 
-            <div className={`rounded-md overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
+            <div className={`rounded-[5px] overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
               <Editor
                 name='fileContent'
                 onChange={(value) => {
                   setFormData({ ...formData, fileContent: value })
                 }}
-                height='400px'
+                height='500px'
                 defaultLanguage='json'
                 theme='custom-vs-dark'
                 loading={<LoaderIcon className='animate-spin' />}

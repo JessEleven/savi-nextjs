@@ -17,7 +17,9 @@ export default function RootLayout ({ children }) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`${roboto.className} bg-neutral-800 text-neutral-50`}>
-        {children}
+        <div className='mx-5 md:mx-14 xl:mx-20 2xl:mx-40'>
+          {children}
+        </div>
       </body>
     </html>
   )
