@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { AlertTriangleIcon, HeartIcon, MaximizeIcon, TrashIcon } from './assets/dash-icons'
+import { HeartIcon, MaximizeIcon, TrashIcon } from './assets/dash-icons'
 import SkeletonCard from './components-dash/ui/skeleton-card'
+import ErrorFetching from './components-dash/ui/error-fetching'
 
 export default function DashPage () {
   const [data, setData] = useState([])
@@ -34,12 +35,7 @@ export default function DashPage () {
 
   if (error) {
     return (
-      <div className='mt-10 flex justify-center'>
-        <div className='flex items-center gap-x-1 px-5 py-2.5 rounded-[5px] border border-neutral-600'>
-          <AlertTriangleIcon className='text-yellow-400' />
-          <h3 className='text-sm'>An unexpected error occurred</h3>
-        </div>
-      </div>
+      <ErrorFetching />
     )
   }
 
