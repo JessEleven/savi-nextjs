@@ -39,3 +39,24 @@ export const createJsonStorage = async (formData) => {
     return error.message
   }
 }
+
+export const deleteJsonStorage = async ({ id, onSuccess }) => {
+  try {
+    const response = await fetch('/api/json-storage', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    })
+    const result = await response.json()
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to delete the JSON file')
+    }
+
+    if (onSuccess) onSuccess()
+
+    return result.data
+  } catch (error) {
+    return error.message
+  }
+}

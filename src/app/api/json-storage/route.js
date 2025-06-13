@@ -79,3 +79,48 @@ export async function POST (req) {
     }, { status: 500 })
   }
 }
+
+export async function DELETE (req) {
+  try {
+    const data = await auth.api.getSession({
+      headers: await headers()
+    })
+    const user = data?.user
+
+    if (!user) {
+      return NextResponse.json({
+        success: false,
+        status_code: 401,
+        message: 'User is not authenticated'
+      }, { status: 401 })
+    }
+    const { id } = await req.json()
+
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        status_code: 400,
+        message: 'ID is missing to delete the JSON file'
+      }, { status: 400 })
+    }
+
+    await db.delete(jsonStorage)
+      .where(and(
+        eq(jsonStorage.id, id),
+        eq(jsonStorage.userId, user.id)
+      ))
+      .returning()
+
+    return NextResponse.json({
+      success: true,
+      status_code: 200,
+      message: 'JSON file successfully deleted'
+    })
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      status_code: 500,
+      message: error.message
+    }, { status: 500 })
+  }
+}

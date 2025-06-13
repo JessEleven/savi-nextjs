@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getAllJsonStorage } from '@/libs/api/json-storage'
+import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { HeartIcon, MaximizeIcon, TrashIcon } from './assets/dash-icons'
+import { AlertTriangleIcon, HeartIcon, MaximizeIcon, TrashIcon } from './assets/dash-icons'
 import SkeletonCard from './components-dash/ui/skeleton-card'
 
 export default function DashPage () {
@@ -21,9 +21,7 @@ export default function DashPage () {
       } catch (error) {
         setError(error)
       } finally {
-        setTimeout(() => {
-          setLoading(false)
-        }, 300)
+        setLoading(false)
       }
     })()
   }, [])
@@ -36,44 +34,56 @@ export default function DashPage () {
 
   if (error) {
     return (
-      <h3 className='mt-10 text-center text-sm'>An unexpected error occurred</h3>
+      <div className='mt-10 flex justify-center'>
+        <div className='flex items-center gap-x-1 px-5 py-2.5 rounded-[5px] border border-neutral-600'>
+          <AlertTriangleIcon className='text-yellow-400' />
+          <h3 className='text-sm'>An unexpected error occurred</h3>
+        </div>
+      </div>
     )
   }
 
   return (
     <main className='mt-10 card-container pr-1 h-[525px] overflow-y-auto'>
       {data.map((item) => (
-        <article
-          key={item.id} className='px-5 py-2.5 rounded-[5px] border border-neutral-600 hover:border-teal-600
-          transition-all duration-300 ease-in-out'
-        >
-          <div className='flex items-center justify-between gap-x-5'>
-            <div className='flex flex-col space-y-1 truncate'>
-              <h3 className='truncate'>File name: {item.fileName}</h3>
-              <h3 className='truncate text-sm'>{dayjs(item.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}</h3>
-            </div>
+        <Link key={item.id} href={`/dash/${item.id}`} className='block'>
+          <article className='px-5 py-2.5 rounded-[5px] border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>
+            <div className='flex items-center justify-between gap-x-5'>
+              <div className='flex flex-col space-y-1 truncate'>
+                <h3 className='truncate'>File name: {item.fileName}</h3>
+                <h3 className='truncate text-sm'>{dayjs(item.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}</h3>
+              </div>
 
-            <div className='flex items-center gap-x-2.5'>
-              <Link href={`/dash/${item.id}`} aria-label='Maximize Icon' className='block btn-border-icon'>
-                <MaximizeIcon />
-              </Link>
-              <button
-                type='button'
-                aria-label='Heart Icon'
-                className='btn-border-icon'
-              >
-                <HeartIcon />
-              </button>
-              <button
-                type='button'
-                aria-label='Trash Icon'
-                className='btn-border-icon'
-              >
-                <TrashIcon />
-              </button>
+              <div className='flex items-center gap-x-2.5'>
+                <Link href={`/dash/${item.id}`} aria-label='Maximize Icon' className='block btn-border-icon'>
+                  <MaximizeIcon />
+                </Link>
+                <button
+                  type='button'
+                  aria-label='Heart Icon'
+                  className='btn-border-icon'
+                >
+                  <HeartIcon />
+                </button>
+                <button
+                  type='button'
+                  aria-label='Trash Icon'
+                  className='btn-border-icon'
+                  onClick={() => {
+                    deleteJsonStorage({
+                      id: item.id,
+                      onSuccess: () => {
+                        setData((prev) => prev.filter((storage) => storage.id !== item.id))
+                      }
+                    })
+                  }}
+                >
+                  <TrashIcon />
+                </button>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </Link>
       ))}
     </main>
   )
