@@ -1,5 +1,6 @@
 import { Roboto } from 'next/font/google'
 import '../resources/globals.css'
+import { Toaster } from 'sonner'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -19,6 +20,14 @@ export default function RootLayout ({ children }) {
       <body className={`${roboto.className} bg-neutral-800 text-neutral-50`}>
         <div className='mx-5 md:mx-14 xl:mx-20 2xl:mx-40'>
           {children}
+          <Toaster
+            position='top-right'
+            expand={false}
+            toastOptions={{
+              style:
+                { background: '#363636', color: '#fafafa', border: '#363636' }
+            }}
+          />
         </div>
       </body>
     </html>

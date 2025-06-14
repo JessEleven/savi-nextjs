@@ -12,6 +12,9 @@ import UploadFile from '../components-dash/ui/upload-file'
 import { useForm } from 'react-hook-form'
 import { inputSchema } from '@/libs/validation-schema/input-schema'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { downloadFile } from '@/utils/download'
+import { toast } from 'sonner'
+import { copyFile } from '@/utils/clipboard'
 
 export default function NewPage () {
   const [isFocused, setIsFocused] = useState(false)
@@ -66,6 +69,34 @@ export default function NewPage () {
     }
   }
 
+  const handleFileCopying = async () => {
+    const content = editorRef.current?.getValue()
+    const success = copyFile(content)
+    return success
+  }
+
+  const handleFileDownload = () => {
+    const fileName = watch('fileName')
+    const fileContent = editorRef.current?.getValue()
+
+    if (!fileName) {
+      return toast.error('The file name field is empty')
+    }
+
+    if (!fileContent) {
+      return toast.error('The editor has no content')
+    }
+
+    try {
+      const parsed = JSON.parse(fileContent)
+      downloadFile({ fileName, fileContent: parsed })
+      return toast.success('File downloaded successfully')
+    } catch (error) {
+      // console.error('Invalid JSON structure:', error)
+      return toast.error('Check the structure of the JSON')
+    }
+  }
+
   return (
     <main className='mt-5 mb-10'>
       <article className='card-container'>
@@ -94,8 +125,15 @@ export default function NewPage () {
               <EditorOptions
                 handleFormat={handleFormat}
                 editorRef={editorRef}
+                handleFileDownload={handleFileDownload}
+                handleFileCopying={handleFileCopying}
               />
-              <EditorOpDropdown />
+              <EditorOpDropdown
+                handleFormat={handleFormat}
+                editorRef={editorRef}
+                handleFileDownload={handleFileDownload}
+                handleFileCopying={handleFileCopying}
+              />
               <UploadFile editorRef={editorRef} />
             </div>
 

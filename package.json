@@ -1,7 +1,7 @@
 {
   "name": "savi-nextjs",
   "description": "Save your json and share them instantly.",
-  "version": "0.11.3",
+  "version": "0.12.3",
   "private": true,
   "scripts": {
     "dev": "next dev -p 1198",
@@ -28,6 +28,7 @@
     "react": "18",
     "react-dom": "18",
     "react-hook-form": "7.57.0",
+    "sonner": "2.0.5",
     "tailwindcss": "^4.1.7",
     "yup": "1.6.1"
   },

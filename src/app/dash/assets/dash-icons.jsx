@@ -180,3 +180,61 @@ export const AlertTriangleIcon = (props) => (
     <path d='M12 16h.01' />
   </svg>
 )
+
+export const DownloadFileIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-file-download'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M14 3v4a1 1 0 0 0 1 1h4' />
+    <path d='M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z' />
+    <path d='M12 17v-6' />
+    <path d='M9.5 14.5l2.5 2.5l2.5 -2.5' />
+  </svg>
+)
+
+export const CopyIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-copy'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z' />
+    <path d='M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1' />
+  </svg>
+)
+
+export const CheckIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-check'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M5 12l5 5l10 -10' />
+  </svg>
+)

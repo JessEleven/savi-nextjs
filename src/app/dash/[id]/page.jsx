@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react'
 import ErrorFetching from '../components-dash/ui/error-fetching'
 import { LoaderIcon } from '../assets/dash-icons'
 import dayjs from 'dayjs'
+import { downloadFile } from '@/utils/download'
+import DownloadFile from '../components-dash/ui/download-file'
+import Clipboard from '../components-dash/ui/clipboard'
+import { copySavedFile } from '@/utils/clipboard'
 
 export default function IdPage ({ params }) {
   const { id } = params
@@ -24,6 +28,14 @@ export default function IdPage ({ params }) {
       }
     })()
   }, [id])
+
+  const handleFileCopying = async () => {
+    return await copySavedFile(data.fileContent)
+  }
+
+  const handleFileDownload = () => {
+    downloadFile({ fileName: data.fileName, fileContent: data.fileContent })
+  }
 
   if (!data) {
     return (
@@ -44,9 +56,15 @@ export default function IdPage ({ params }) {
       <h3 className='text-transparent bg-clip-text bg-linear-30 from-rose-400 via-cyan-400 font-medium text-2xl'>
         JSON file viewer
       </h3>
-      <div className='block md:flex md:items-center justify-between mt-5'>
-        <h3 className='text-base'>File name: {data.fileName}</h3>
+
+      <div className='block md:flex md:items-center justify-between mt-5 mb-2.5 truncate'>
+        <h3 className='text-base truncate'>File name: {data.fileName}</h3>
         <h3 className='text-sm'>{dayjs(data.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}</h3>
+      </div>
+
+      <div className='flex items-center gap-x-2.5'>
+        <Clipboard handleFileCopying={handleFileCopying} />
+        <DownloadFile handleFileDownload={handleFileDownload} />
       </div>
 
       <div className='rounded-[5px] overflow-hidden mt-2.5'>
