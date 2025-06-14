@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { FileUploadIcon } from '../assets/dash-icons'
+import { FileUploadIcon } from '../../assets/dash-icons'
 
 export default function UploadFile ({ editorRef }) {
   const fileInputRef = useRef(null)

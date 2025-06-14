@@ -5,26 +5,32 @@ import Link from 'next/link'
 import { LoaderIcon } from '../assets/dash-icons'
 import { useEffect, useRef, useState } from 'react'
 import EditorOptions from '../components-dash/editor-options'
-import UploadFile from '../components-dash/upload-file'
 import { createJsonStorage } from '@/libs/api/json-storage'
 import { useRouter } from 'next/navigation'
 import EditorOpDropdown from '../components-dash/editor-op-dropdown'
+import UploadFile from '../components-dash/ui/upload-file'
+import { useForm } from 'react-hook-form'
+import { inputSchema } from '@/libs/validation-schema/input-schema'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 export default function NewPage () {
   const [isFocused, setIsFocused] = useState(false)
-  const [formData, setFormData] = useState({
-    fileName: '', fileContent: ''
+  const {
+    setValue,
+    trigger,
+    watch,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid }
+  } = useForm({
+    resolver: yupResolver(inputSchema),
+    mode: 'onChange'
   })
   const editorRef = useRef(null)
   const router = useRouter()
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
+  const onSubmit = async (formData) => {
     const content = editorRef.current?.getValue()
     const parsed = JSON.parse(content)
 
@@ -33,6 +39,7 @@ export default function NewPage () {
         ...formData,
         fileContent: parsed
       })
+      reset()
       router.push('/dash')
     } catch (error) {
       console.error('Unexpected error:', error)
@@ -66,20 +73,23 @@ export default function NewPage () {
           Create or upload a JSON file
         </h3>
 
-        <form onSubmit={handleSubmit} className='mt-5 text-sm'>
-          <div className='flex flex-col'>
+        <form onSubmit={handleSubmit(onSubmit)} className='mt-5 text-sm'>
+          <div className='flex flex-col relative'>
             <label htmlFor='fileName'>File name</label>
             <input
               id='fileName'
               type='text'
               name='fileName'
-              className='mt-1.5 mb-5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-[5px] px-4 py-1.5 font-normal'
+              className='mt-1.5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-[5px] px-4 py-1.5 font-normal'
               placeholder='e.g. First file, New file...'
-              onChange={handleChange}
+              {...register('fileName')}
             />
+            {errors.fileName && (
+              <p className='absolute top-16 text-rose-400'>{errors.fileName.message}</p>
+            )}
           </div>
 
-          <div className='flex flex-col'>
+          <div className='flex flex-col mt-7'>
             <div className='flex items-center justify-between mb-2.5'>
               <EditorOptions
                 handleFormat={handleFormat}
@@ -89,11 +99,12 @@ export default function NewPage () {
               <UploadFile editorRef={editorRef} />
             </div>
 
-            <div className={`rounded-[5px] overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
+            <div className={`relative rounded-[5px] overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
               <Editor
                 name='fileContent'
                 onChange={(value) => {
-                  setFormData({ ...formData, fileContent: value })
+                  setValue('fileContent', value)
+                  trigger('fileContent')
                 }}
                 height='500px'
                 defaultLanguage='json'
@@ -135,11 +146,16 @@ export default function NewPage () {
                 }}
               />
             </div>
+            <input type='hidden' {...register('fileContent')} value={watch('fileContent') || ''} />
+
+            {errors.fileContent && (
+              <p className='absolute top-[716px] text-rose-400'>{errors.fileContent.message}</p>
+            )}
           </div>
 
-          <div className='flex justify-end gap-x-3 mt-5'>
+          <div className='flex justify-end gap-x-3 mt-7'>
             <Link href='/dash' className='btn-border block p-[7px]'>Cancel</Link>
-            <button type='submit' className='btn-bg cursor-pointer'>Save</button>
+            <button type='submit' className='btn-bg cursor-pointer' disabled={!isValid}>Save file</button>
           </div>
         </form>
       </article>
