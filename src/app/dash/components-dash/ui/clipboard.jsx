@@ -11,7 +11,7 @@ export default function Clipboard ({ editorRef, handleFileCopying, responsiveMod
   useEffect(() => {
     const timer = setTimeout(() => {
       setCopied(false)
-    }, 2500)
+    }, 2000)
 
     return () => clearTimeout(timer)
   }, [copied])
@@ -20,6 +20,7 @@ export default function Clipboard ({ editorRef, handleFileCopying, responsiveMod
     <>
       <button
         type='button'
+        aria-label='Copy Icon'
         onClick={async () => {
           if (pathname === '/dash/new') {
             const value = editorRef?.current.getValue()

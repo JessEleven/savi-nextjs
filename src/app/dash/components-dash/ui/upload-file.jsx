@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { FileUploadIcon } from '../../assets/dash-icons'
+import { toast } from 'sonner'
 
 export default function UploadFile ({ editorRef }) {
   const fileInputRef = useRef(null)
@@ -17,8 +18,8 @@ export default function UploadFile ({ editorRef }) {
         if (editorRef.current) {
           editorRef.current.setValue(formatted)
         }
-      } catch (err) {
-        window.alert('Invalid JSON file')
+      } catch (error) {
+        return toast.error('The JSON file is not valid')
       }
       e.target.value = ''
     }
@@ -29,6 +30,7 @@ export default function UploadFile ({ editorRef }) {
     <>
       <button
         type='button'
+        aria-label='File Upload Icon'
         onClick={() => fileInputRef.current?.click()}
         className='flex items-center gap-x-1 btn-border px-3 py-[7px] cursor-pointer'
       >

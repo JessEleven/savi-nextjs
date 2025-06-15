@@ -1,7 +1,7 @@
 export default function DashLayout ({ children }) {
   return (
-    <main>
+    <div className='main-container'>
       {children}
-    </main>
+    </div>
   )
 }

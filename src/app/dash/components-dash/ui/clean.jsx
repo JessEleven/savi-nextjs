@@ -5,6 +5,7 @@ export default function Clean ({ editorRef, responsiveMode }) {
   return (
     <button
       type='button'
+      aria-label='Eraser Icon'
       onClick={() => {
         if (editorRef?.current) {
           editorRef.current.setValue('')

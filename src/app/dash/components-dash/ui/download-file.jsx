@@ -9,7 +9,7 @@ export default function DownloadFile ({ handleFileDownload, responsiveMode }) {
     <>
       <button
         type='button'
-        aria-label=''
+        aria-label='Download File Icon'
         onClick={handleFileDownload}
         className={(pathname === '/dash/new' && responsiveMode)
           ? clsx(

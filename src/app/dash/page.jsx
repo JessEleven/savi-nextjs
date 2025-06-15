@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { HeartIcon, MaximizeIcon, TrashIcon } from './assets/dash-icons'
+import { HeartIcon, KeyframeFilledIcon, TrashIcon } from './assets/dash-icons'
 import SkeletonCard from './components-dash/ui/skeleton-card'
 import ErrorFetching from './components-dash/ui/error-fetching'
+import { toast } from 'sonner'
+import { ClockCirceIcon } from './assets/animated-icons'
 
 export default function DashPage () {
   const [data, setData] = useState([])
@@ -33,6 +35,15 @@ export default function DashPage () {
     )
   }
 
+  if (data.length <= 0 && !loading) {
+    return (
+      <div className='min-h-screen flex flex-col items-center justify-center'>
+        <ClockCirceIcon />
+        <h3 className='text-neutral-400 text-sm'>No files were found</h3>
+      </div>
+    )
+  }
+
   if (error) {
     return (
       <ErrorFetching />
@@ -43,17 +54,19 @@ export default function DashPage () {
     <main className='mt-10 card-container pr-1 h-[525px] overflow-y-auto'>
       {data.map((item) => (
         <Link key={item.id} href={`/dash/${item.id}`} className='block'>
-          <article className='px-5 py-2.5 rounded-[5px] border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>
+          <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>
             <div className='flex items-center justify-between gap-x-5'>
               <div className='flex flex-col space-y-1 truncate'>
-                <h3 className='truncate'>File name: {item.fileName}</h3>
-                <h3 className='truncate text-sm'>{dayjs(item.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}</h3>
+                <div className='flex items-center gap-x-1'>
+                  <KeyframeFilledIcon className='text-cyan-600' />
+                  <h3 className='truncate font-medium'>{item.fileName}</h3>
+                </div>
+                <h3 className='truncate text-sm text-neutral-400'>
+                  {dayjs(item.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}
+                </h3>
               </div>
 
               <div className='flex items-center gap-x-2.5'>
-                <Link href={`/dash/${item.id}`} aria-label='Maximize Icon' className='block btn-border-icon'>
-                  <MaximizeIcon />
-                </Link>
                 <button
                   type='button'
                   aria-label='Heart Icon'
@@ -65,13 +78,16 @@ export default function DashPage () {
                   type='button'
                   aria-label='Trash Icon'
                   className='btn-border-icon'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
                     deleteJsonStorage({
                       id: item.id,
                       onSuccess: () => {
                         setData((prev) => prev.filter((storage) => storage.id !== item.id))
                       }
                     })
+                    toast.success('File deleted successfully')
                   }}
                 >
                   <TrashIcon />

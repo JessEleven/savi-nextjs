@@ -11,7 +11,7 @@ import DownloadFile from '../components-dash/ui/download-file'
 import Clipboard from '../components-dash/ui/clipboard'
 import { copySavedFile } from '@/utils/clipboard'
 
-export default function IdPage ({ params }) {
+export default function GetPageId ({ params }) {
   const { id } = params
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
@@ -58,8 +58,10 @@ export default function IdPage ({ params }) {
       </h3>
 
       <div className='block md:flex md:items-center justify-between mt-5 mb-2.5 truncate'>
-        <h3 className='text-base truncate'>File name: {data.fileName}</h3>
-        <h3 className='text-sm'>{dayjs(data.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}</h3>
+        <h3 className='text-base truncate font-medium'>{data.fileName}</h3>
+        <h3 className='text-sm text-neutral-400'>
+          {dayjs(data.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}
+        </h3>
       </div>
 
       <div className='flex items-center gap-x-2.5'>

@@ -42,6 +42,7 @@ export default function NewPage () {
         ...formData,
         fileContent: parsed
       })
+      toast.success('File created successfully')
       reset()
       router.push('/dash')
     } catch (error) {

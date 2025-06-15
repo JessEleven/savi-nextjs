@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.main-container {
+  @apply md:mx-14 xl:mx-20 2xl:mx-40
+}
+
 .btn-bg {
   @apply px-4 py-[9px] rounded-[5px] text-sm text-neutral-900 duration-200 ease-in-out 
   transition-colors bg-neutral-100 hover:bg-neutral-200/85 leading-3.5

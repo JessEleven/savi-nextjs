@@ -5,6 +5,7 @@ export default function Format ({ handleFormat, responsiveMode }) {
   return (
     <button
       type='button'
+      aria-label='File Icon'
       onClick={handleFormat}
       className={clsx(
         'bg-transparent flex items-center gap-x-1',
