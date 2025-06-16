@@ -256,3 +256,87 @@ export const KeyframeFilledIcon = (props) => (
     <path d='M12 4a2.599 2.599 0 0 0 -2 .957l-4.355 5.24a2.847 2.847 0 0 0 -.007 3.598l4.368 5.256c.499 .6 1.225 .949 1.994 .949a2.599 2.599 0 0 0 2 -.957l4.355 -5.24a2.847 2.847 0 0 0 .007 -3.598l-4.368 -5.256a2.593 2.593 0 0 0 -1.994 -.949z' />
   </svg>
 )
+
+export const PlusIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-plus'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M12 5l0 14' />
+    <path d='M5 12l14 0' />
+  </svg>
+)
+
+export const HeartFilledIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='currentColor'
+    className='icon icon-tabler icons-tabler-filled icon-tabler-heart'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z' />
+  </svg>
+)
+
+export const CircleIcon = (props) => (
+  <svg
+    width={11}
+    height={11}
+    viewBox='0 0 24 24'
+    fill='currentColor'
+    className='icon icon-tabler icons-tabler-filled icon-tabler-circle'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z' />
+  </svg>
+)
+
+export const HomeIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-home'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M5 12l-2 0l9 -9l9 9l-2 0' />
+    <path d='M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7' />
+  </svg>
+)
+
+export const SlashIcon = (props) => (
+  <svg
+    width={28}
+    height={28}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-slash'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M17 5l-10 14' />
+  </svg>
+)
