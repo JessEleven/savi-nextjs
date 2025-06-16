@@ -1,7 +1,7 @@
 export const ClockCirceIcon = (props) => (
   <svg
-    width={64}
-    height={64}
+    width={72}
+    height={72}
     viewBox='0 0 24 24'
     fill='none'
     {...props}
@@ -21,11 +21,11 @@ export const ClockCirceIcon = (props) => (
     <path
       stroke='#fb7185'
       strokeLinecap='round'
-      strokeWidth={1}
+      strokeWidth={1.5}
       d='M12.021 12l2.325 2.325'
     />
     <path
-      stroke='#22d3ee'
+      stroke='#06b6d4'
       strokeLinecap='round'
       strokeLinejoin='round'
       strokeWidth={1.5}

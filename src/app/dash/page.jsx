@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
@@ -8,13 +8,15 @@ import { HeartIcon, KeyframeFilledIcon, TrashIcon } from './assets/dash-icons'
 import SkeletonCard from './components-dash/ui/skeleton-card'
 import ErrorFetching from './components-dash/ui/error-fetching'
 import { toast } from 'sonner'
-import { ClockCirceIcon } from './assets/animated-icons'
 import OptionsLinks from './components-dash/ui/options-links'
+import EmptyList from './components-dash/ui/empty-list'
 
 export default function DashPage () {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const scrollRef = useRef(null)
+  const [hasScrollbar, setHasScrollbar] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -30,6 +32,15 @@ export default function DashPage () {
     })()
   }, [])
 
+  useEffect(() => {
+    const el = scrollRef.current
+    if (el && el.scrollHeight > el.clientHeight) {
+      setHasScrollbar(true)
+    } else {
+      setHasScrollbar(false)
+    }
+  }, [data])
+
   if (loading) {
     return (
       <SkeletonCard />
@@ -38,10 +49,7 @@ export default function DashPage () {
 
   if (data.length <= 0 && !loading) {
     return (
-      <div className='min-h-screen flex flex-col items-center justify-center'>
-        <ClockCirceIcon />
-        <h3 className='text-neutral-400 text-sm'>No files were found</h3>
-      </div>
+      <EmptyList message='No files were found' />
     )
   }
 
@@ -52,9 +60,13 @@ export default function DashPage () {
   }
 
   return (
-    <main className='mt-10 card-container'>
+    <main className='mt-7 card-container'>
       <OptionsLinks />
-      <div className='pr-1 h-[525px] overflow-y-auto'>
+
+      <div
+        ref={scrollRef}
+        className={`flex flex-col gap-y-3 h-[480px] overflow-y-auto scrollbar-custom ${hasScrollbar ? 'pr-1.5' : ''}`}
+      >
         {data?.map((item) => (
           <Link key={item.id} href={`/dash/${item.id}`} className='block'>
             <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>

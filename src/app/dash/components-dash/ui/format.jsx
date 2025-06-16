@@ -8,11 +8,11 @@ export default function Format ({ handleFormat, responsiveMode }) {
       aria-label='File Icon'
       onClick={handleFormat}
       className={clsx(
-        'bg-transparent flex items-center gap-x-1',
+        'bg-transparent flex items-center gap-x-1.5',
         responsiveMode === 'md' && 'editor-btn'
       )}
     >
-      <FileIcon className={clsx('size-5', responsiveMode === 'md' && 'w-4 h-4')} />
+      <FileIcon className={clsx('size-6', responsiveMode === 'md' && 'w-4 h-4')} />
       <span>Format</span>
     </button>
   )

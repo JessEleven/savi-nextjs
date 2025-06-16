@@ -26,7 +26,8 @@ export default function EditorOpDropdown ({
       </button>
 
       {open && (
-        <article className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-2.5 text-base rounded-t-[10px] bg-[#383535]'>
+        <article className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-4 text-xl font-normal rounded-t-[10px] bg-[#383535]'>
+          <h3 className='text-[16px] text-center'>Editor options</h3>
           <Format handleFormat={handleFormat} />
           <Clean editorRef={editorRef} />
           <Clipboard

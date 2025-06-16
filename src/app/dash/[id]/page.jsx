@@ -52,13 +52,9 @@ export default function GetPageId ({ params }) {
   }
 
   return (
-    <main className='mt-5 flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
-      <h3 className='text-transparent bg-clip-text bg-linear-30 from-rose-400 via-cyan-400 font-medium text-2xl'>
-        JSON file viewer
-      </h3>
-
-      <div className='block md:flex md:items-center justify-between mt-5 mb-2.5 truncate'>
-        <h3 className='text-base truncate font-medium'>{data.fileName}</h3>
+    <main className='mt-7 flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
+      <div className='block md:flex md:items-center justify-between mb-5 truncate'>
+        <h3 className='text-2xl truncate font-medium'>{data.fileName}</h3>
         <h3 className='text-sm text-neutral-400'>
           {dayjs(data.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}
         </h3>

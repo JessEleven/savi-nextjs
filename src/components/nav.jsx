@@ -40,7 +40,7 @@ export default async function Nav () {
             ? (
               <>
                 <li>
-                  <Link href='/dash' className='btn-bg block'>
+                  <Link href='/dash' className='btn-bg py-[9px] block'>
                     Dashboard
                   </Link>
                 </li>

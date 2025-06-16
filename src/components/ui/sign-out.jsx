@@ -13,7 +13,7 @@ async function handleSignOut () {
 
 export default function SignOut ({ icon = false, text = false, both = false }) {
   return (
-    <form action={handleSignOut}>
+    <form action={handleSignOut} className='hidden md:inline'>
       <button type='submit' className='flex cursor-pointer'>
         {icon && (
           <div className='btn-border-icon'>

@@ -3,7 +3,7 @@
 import Editor, { loader } from '@monaco-editor/react'
 import Link from 'next/link'
 import { LoaderIcon } from '../assets/dash-icons'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import EditorOptions from '../components-dash/editor-options'
 import { createJsonStorage } from '@/libs/api/json-storage'
 import { useRouter } from 'next/navigation'
@@ -15,9 +15,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { downloadFile } from '@/utils/download'
 import { toast } from 'sonner'
 import { copyFile } from '@/utils/clipboard'
+import Text from '../components-dash/ui/text'
 
 export default function NewPage () {
-  const [isFocused, setIsFocused] = useState(false)
+  // const [isFocused, setIsFocused] = useState(false)
   const {
     setValue,
     trigger,
@@ -99,11 +100,9 @@ export default function NewPage () {
   }
 
   return (
-    <main className='mt-5 mb-10'>
+    <main className='mt-7 mb-10'>
       <article className='card-container'>
-        <h3 className='text-transparent bg-clip-text bg-linear-30 from-rose-400 via-cyan-400 font-medium text-2xl'>
-          Create or upload a JSON file
-        </h3>
+        <Text name='Create a new file' />
 
         <form onSubmit={handleSubmit(onSubmit)} className='mt-5 text-sm'>
           <div className='flex flex-col relative'>
@@ -138,7 +137,7 @@ export default function NewPage () {
               <UploadFile editorRef={editorRef} />
             </div>
 
-            <div className={`relative rounded-[5px] overflow-hidden border ${isFocused ? 'border-slate-400' : 'border-neutral-600'}`}>
+            <div className='relative rounded-md overflow-hidden'>
               <Editor
                 name='fileContent'
                 onChange={(value) => {
@@ -151,8 +150,8 @@ export default function NewPage () {
                 loading={<LoaderIcon className='animate-spin' />}
                 onMount={(editor) => {
                   editorRef.current = editor
-                  editor.onDidFocusEditorWidget(() => setIsFocused(true))
-                  editor.onDidBlurEditorWidget(() => setIsFocused(false))
+                  // editor.onDidFocusEditorWidget(() => setIsFocused(true))
+                  // editor.onDidBlurEditorWidget(() => setIsFocused(false))
                 }}
                 options={{
                   minimap: { enabled: false },
@@ -188,13 +187,15 @@ export default function NewPage () {
             <input type='hidden' {...register('fileContent')} value={watch('fileContent') || ''} />
 
             {errors.fileContent && (
-              <p className='absolute top-[716px] text-rose-400'>{errors.fileContent.message}</p>
+              <p className='absolute top-[767px] text-rose-400'>
+                {errors.fileContent.message}
+              </p>
             )}
           </div>
 
           <div className='flex justify-end gap-x-3 mt-7'>
             <Link href='/dash' className='btn-border block p-[7px]'>Cancel</Link>
-            <button type='submit' className='btn-bg cursor-pointer' disabled={!isValid}>Save file</button>
+            <button type='submit' className='py-[9px] btn-bg cursor-pointer' disabled={!isValid}>Save file</button>
           </div>
         </form>
       </article>

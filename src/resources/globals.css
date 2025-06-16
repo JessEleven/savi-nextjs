@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 .main-container {
-  @apply md:mx-14 xl:mx-20 2xl:mx-40
+  @apply mx-5 md:mx-14 xl:mx-20 2xl:mx-40
 }
 
 .btn-bg {
-  @apply px-4 py-[9px] rounded-[5px] text-sm text-neutral-900 duration-200 ease-in-out 
+  @apply px-4 rounded-[5px] text-sm text-neutral-900 duration-200 ease-in-out 
   transition-colors bg-neutral-100 hover:bg-neutral-200/85 leading-3.5
 }
 
@@ -30,5 +30,18 @@
 }
 
 .card-container {
-  @apply flex flex-col gap-y-2.5 mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]
+  @apply mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #525252; /* text-neutral-600 */
+  border-radius: 8px
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
 }

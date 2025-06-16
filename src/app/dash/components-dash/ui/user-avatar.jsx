@@ -13,7 +13,7 @@ export default async function UserAvatar () {
       height={32}
       src={user?.image}
       alt='Avatar'
-      className='rounded-full'
+      className='hidden md:inline rounded-full'
     />
   )
 }

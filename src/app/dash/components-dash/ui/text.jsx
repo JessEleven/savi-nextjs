@@ -1,7 +1,7 @@
 export default function Text ({ name }) {
   return (
-    <div className='text-2xl font-medium'>
+    <h2 className='text-[27px] font-medium'>
       {name}
-    </div>
+    </h2>
   )
 }

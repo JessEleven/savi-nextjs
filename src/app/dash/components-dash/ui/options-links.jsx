@@ -8,12 +8,13 @@ export default function OptionsLinks () {
       <Text name='Your files' />
 
       <div className='flex items-center gap-x-2.5'>
-        <Link href='/dash/new' className='block btn-bg'>
+        <Link href='/dash/new' className='block py-2 btn-bg'>
           <div className='flex items-center'>
             <PlusIcon />
             <span className='hidden md:inline md:ml-1'>New file</span>
           </div>
         </Link>
+
         <Link href='#' className='block btn-border py-[7px]'>
           <div className='flex items-center'>
             <HeartFilledIcon />
