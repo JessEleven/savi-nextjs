@@ -1,7 +1,7 @@
 {
   "name": "savi-nextjs",
   "description": "Save your json and share them instantly.",
-  "version": "0.14.5",
+  "version": "0.14.6",
   "private": true,
   "scripts": {
     "dev": "next dev -p 1198",
