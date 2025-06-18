@@ -52,7 +52,7 @@ export default function GetPageId ({ params }) {
   }
 
   return (
-    <main className='mt-7 flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
+    <main className='mt-7 mb-10 flex flex-col mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]'>
       <div className='block md:flex md:items-center justify-between mb-5 truncate'>
         <h3 className='text-2xl truncate font-medium'>{data.fileName}</h3>
         <h3 className='text-sm text-neutral-400'>

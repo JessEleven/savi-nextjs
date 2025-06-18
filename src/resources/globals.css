@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .main-container {
-  @apply mx-5 md:mx-14 xl:mx-20 2xl:mx-40
+  @apply mx-5 md:mx-20 lg:mx-40 xl:mx-60 2xl:mx-[380px]
 }
 
 .btn-bg {
