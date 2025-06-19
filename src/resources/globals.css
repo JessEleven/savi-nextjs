@@ -33,6 +33,7 @@
   @apply mx-auto w-full lg:w-[700px] xl:w-[850px] 2xl:w-[1000px]
 }
 
+/* Custom scrollbar */
 .scrollbar-custom::-webkit-scrollbar {
   width: 8px;
 }
@@ -44,4 +45,21 @@
 
 .scrollbar-custom::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* Animate border - Landing page */
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@theme{
+  --animate-rotate-border: border-rotate 3s linear infinite;
+
+  @keyframes border-rotate {
+    to {
+      --border-angle: 360deg;
+    }
+  }
 }
