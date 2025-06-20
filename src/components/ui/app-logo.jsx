@@ -1,7 +1,17 @@
 import Image from 'next/image'
 import Logo from '../../../public/logo.svg'
+import clsx from 'clsx'
 
-export default function AppLogo ({ showText = false, size }) {
+const fontSizeMap = {
+  12: 'text-sm 2xl:text-sm',
+  20: 'text-xl md:text-2xl'
+}
+
+export default function AppLogo ({
+  showText = false,
+  size,
+  fontSize
+}) {
   return (
     <div className='flex items-center'>
       <Image
@@ -11,7 +21,9 @@ export default function AppLogo ({ showText = false, size }) {
         priority
       />
       {showText && (
-        <h3 className='text-center text-xl md:text-2xl font-medium ml-1.5'>Savi</h3>
+        <h3 className={clsx('ml-1.5 font-medium', fontSizeMap[fontSize])}>
+          Savi
+        </h3>
       )}
     </div>
   )
