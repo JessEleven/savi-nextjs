@@ -13,7 +13,7 @@ async function handleSignOut () {
 
 export default function SignOut ({ icon = false, text = false, both = false }) {
   return (
-    <form action={handleSignOut} className='hidden md:inline'>
+    <form action={handleSignOut}>
       <button type='submit' className='flex cursor-pointer'>
         {icon && (
           <div className='btn-border-icon'>
@@ -24,7 +24,7 @@ export default function SignOut ({ icon = false, text = false, both = false }) {
           <span className='btn-border py-2'>Sign Out</span>
         )}
         {both && (
-          <div className='flex items-center gap-x-1.5 btn-border py-[7px]'>
+          <div className='flex items-center gap-x-1.5 text-sm hover:text-rose-400 duration-200 ease-in-out'>
             <LogoutIcon />
             <span>Sign Out</span>
           </div>

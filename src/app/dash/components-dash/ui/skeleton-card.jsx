@@ -1,6 +1,6 @@
 export default function SkeletonCard () {
   return (
-    <div className='mt-24 flex flex-col gap-y-3 card-container'>
+    <div className='mt-7 flex flex-col gap-y-3 card-container'>
       {Array.from({ length: 6 }).map((_, index) => (
         <article key={index} className='px-6 py-2.5 rounded-lg border border-neutral-600 animate-pulse'>
           <div className='flex items-center justify-between gap-x-5'>
