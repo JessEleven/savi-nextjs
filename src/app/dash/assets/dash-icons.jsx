@@ -292,8 +292,8 @@ export const HeartFilledIcon = (props) => (
 
 export const CircleIcon = (props) => (
   <svg
-    width={11}
-    height={11}
+    width={10}
+    height={10}
     viewBox='0 0 24 24'
     fill='currentColor'
     className='icon icon-tabler icons-tabler-filled icon-tabler-circle'

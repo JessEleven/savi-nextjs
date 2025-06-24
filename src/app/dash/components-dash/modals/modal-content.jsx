@@ -12,7 +12,7 @@ export default async function ModalContent () {
 
   return (
     <div className='fixed inset-0 flex pt-[90px] -z-40 bg-neutral-800/80'>
-      <div className='h-fit w-full md:w-96 mx-5 md:mx-auto p-5 rounded-lg border border-neutral-600 bg-neutral-800'>
+      <div className='h-fit w-full md:w-96 mx-5 md:mx-auto p-5 rounded-lg border border-neutral-600 bg-neutral-800 truncate'>
         <div className='flex items-center justify-between'>
           <div className='flex flex-col truncate'>
             <h3 className='text-[16px] truncate'>{user?.name}</h3>
@@ -20,6 +20,9 @@ export default async function ModalContent () {
           </div>
           <UserAvatar />
         </div>
+        <h3 className='mt-2.5 text-sm truncate'>
+          Account created at {dayjs(user?.createdAt).format('MMMM DD, YYYY • hh:mm a')}
+        </h3>
 
         <div className='w-full my-2.5 border border-neutral-600' />
 
@@ -29,7 +32,7 @@ export default async function ModalContent () {
         </div>
 
         <h3 className='text-sm'>
-          Expires at {dayjs(session?.expiresAt).format('MMMM DD, YYYY • hh:mm:ss a')}
+          Expires at {dayjs(session?.expiresAt).format('MMMM DD, YYYY • hh:mm a')}
         </h3>
 
         <div className='w-full my-2.5 border border-neutral-600' />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Format from './ui/format'
 import Clean from './ui/clean'
 import { DotsIcon } from '../assets/dash-icons'
@@ -12,9 +12,40 @@ export default function EditorOpDropdown ({
   handleFileCopying
 }) {
   const [open, setOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [open])
+
+  useEffect(() => {
+    const editorInstance = editorRef?.current
+
+    if (!editorInstance) return
+
+    const focusListener = editorInstance.onDidFocusEditorText(() => {
+      setOpen(false)
+    })
+
+    return () => {
+      focusListener?.dispose()
+    }
+  }, [editorRef])
 
   return (
-    <div className='block md:hidden'>
+    <div ref={dropdownRef} className='block md:hidden'>
       <button
         type='button'
         aria-label='Dots Icon'
@@ -26,8 +57,8 @@ export default function EditorOpDropdown ({
       </button>
 
       {open && (
-        <article className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-4 text-xl font-normal rounded-t-[10px] bg-[#383535]'>
-          <h3 className='text-[16px] text-center'>Editor options</h3>
+        <article className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-4 text-xl font-normal rounded-t-[10px] border-t border-t-neutral-600 bg-neutral-800'>
+          <h3 className='text-sm text-center text-neutral-400'>Editor options</h3>
           <Format handleFormat={handleFormat} />
           <Clean editorRef={editorRef} />
           <Clipboard

@@ -81,22 +81,32 @@ export default function NewPage () {
     const fileName = watch('fileName')
     const fileContent = editorRef.current?.getValue()
 
-    if (!fileName) {
+    /* if (!fileName) {
       return toast.error('The file name field is empty')
-    }
+    } */
 
     if (!fileContent) {
       return toast.error('The editor has no content')
     }
+    let parsed
 
     try {
-      const parsed = JSON.parse(fileContent)
-      downloadFile({ fileName, fileContent: parsed })
-      return toast.success('File downloaded successfully')
+      parsed = JSON.parse(fileContent)
     } catch (error) {
       // console.error('Invalid JSON structure:', error)
       return toast.error('Check the structure of the JSON')
     }
+
+    const isEmptyJson =
+    (typeof parsed === 'object' && !Array.isArray(parsed) && Object.keys(parsed).length === 0) || // {}
+    (Array.isArray(parsed) && parsed.length === 0) || // []
+    (Array.isArray(parsed) && parsed.length === 1 && JSON.stringify(parsed[0]) === '{}') // [{}]
+
+    if (isEmptyJson) {
+      return toast.error('Cannot download an empty JSON structure')
+    }
+    downloadFile({ fileName, fileContent: parsed })
+    toast.success('File downloaded successfully')
   }
 
   return (
@@ -187,15 +197,15 @@ export default function NewPage () {
             <input type='hidden' {...register('fileContent')} value={watch('fileContent') || ''} />
 
             {errors.fileContent && (
-              <p className='absolute top-[767px] text-rose-400'>
+              <p className='absolute top-[782px] text-rose-400'>
                 {errors.fileContent.message}
               </p>
             )}
           </div>
 
           <div className='flex justify-end gap-x-3 mt-7'>
-            <Link href='/dash' className='btn-border block p-[7px]'>Cancel</Link>
-            <button type='submit' className='py-[9px] btn-bg cursor-pointer' disabled={!isValid}>Save file</button>
+            <Link href='/dash' className='block px-4 py-[7px] btn-border'>Cancel</Link>
+            <button type='submit' className='px-4 py-[9px] btn-bg cursor-pointer disabled:cursor-none' disabled={!isValid}>Save</button>
           </div>
         </form>
       </article>

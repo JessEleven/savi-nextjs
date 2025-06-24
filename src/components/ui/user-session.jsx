@@ -34,7 +34,7 @@ export default async function UserSession () {
           ? (
             <>
               <li>
-                <Link href='/dash' className='btn-bg py-[9px] block'>
+                <Link href='/dash' className='block px-4 py-[9px] btn-bg'>
                   Dashboard
                 </Link>
               </li>
@@ -46,7 +46,7 @@ export default async function UserSession () {
           : (
             <>
               <li>
-                <Link href='/sign-in' className='btn-bg py-[9px] block'>
+                <Link href='/sign-in' className='block px-4 py-[9px] btn-bg'>
                   Sign In
                 </Link>
               </li>

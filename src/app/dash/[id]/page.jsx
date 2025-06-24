@@ -56,7 +56,7 @@ export default function GetPageId ({ params }) {
       <div className='block md:flex md:items-center justify-between mb-5 truncate'>
         <h3 className='text-2xl truncate font-medium'>{data.fileName}</h3>
         <h3 className='text-sm text-neutral-400'>
-          {dayjs(data.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}
+          {dayjs(data.createdAt).format('MMMM DD, YYYY • hh:mm a')}
         </h3>
       </div>
 
@@ -65,7 +65,7 @@ export default function GetPageId ({ params }) {
         <DownloadFile handleFileDownload={handleFileDownload} />
       </div>
 
-      <div className='rounded-[5px] overflow-hidden mt-2.5'>
+      <div className='rounded-lg overflow-hidden mt-2.5'>
         <Editor
           value={JSON.stringify(data.fileContent, null, 2)}
           height='500px'

@@ -21,7 +21,7 @@ export default function SignOut ({ icon = false, text = false, both = false }) {
           </div>
         )}
         {text && (
-          <span className='btn-border py-2'>Sign Out</span>
+          <span className='px-4 py-2 btn-border'>Sign Out</span>
         )}
         {both && (
           <div className='flex items-center gap-x-1.5 text-sm hover:text-rose-400 duration-200 ease-in-out'>

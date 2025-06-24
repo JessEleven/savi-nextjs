@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Text from './text'
-import { HeartFilledIcon, PlusIcon, RefreshIcon } from '../../assets/dash-icons'
+import { HeartIcon, PlusIcon, RefreshIcon } from '../../assets/dash-icons'
 
 export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasItems }) {
   return (
@@ -21,7 +21,7 @@ export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasIte
           {loading ? <RefreshIcon className='animate-spin' /> : <RefreshIcon />}
         </button>
 
-        <Link href='/dash/new' className='block py-2 btn-bg'>
+        <Link href='/dash/new' className='block px-2 md:px-4 py-2 btn-bg'>
           <div className='flex items-center'>
             <PlusIcon />
             <span className='hidden md:inline md:ml-1'>New file</span>
@@ -29,9 +29,9 @@ export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasIte
         </Link>
 
         {(hasItems || loading) && (
-          <Link href='#' className='block btn-border py-[7px]'>
+          <Link href='#' className='block px-[7px] md:px-4 py-[7px] btn-border'>
             <div className='flex items-center'>
-              <HeartFilledIcon />
+              <HeartIcon />
               <span className='hidden md:inline md:ml-1'>Favorites</span>
             </div>
           </Link>

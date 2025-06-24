@@ -72,7 +72,7 @@ export default function DashPage () {
                       <h3 className='truncate font-medium'>{item.fileName}</h3>
                     </div>
                     <h3 className='truncate text-sm text-neutral-400'>
-                      {dayjs(item.createdAt).format('YYYY MMMM DD - hh:mm:ss a')}
+                      {dayjs(item.createdAt).format('MMMM DD, YYYY • hh:mm a')}
                     </h3>
                   </div>
 

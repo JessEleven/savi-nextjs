@@ -19,9 +19,9 @@ export default async function GetSessionStatus () {
   const color = isExpiringSoon ? 'text-yellow-500' : 'text-emerald-500'
 
   return (
-    <div className='flex items-center gap-x-1 rounded-full px-2.5 py-1 bg-neutral-500/50'>
+    <div className='flex items-center gap-x-1 leading-2.5 rounded-full px-2.5 py-[3.5px] bg-neutral-500/50'>
       <CircleIcon className={color} />
-      <span className='text-[10px] leading-3 tracking-wide'>{statusText}</span>
+      <span className='mt-[0.5px] text-[10px] tracking-wide'>{statusText}</span>
     </div>
   )
 }

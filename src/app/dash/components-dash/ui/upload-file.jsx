@@ -32,7 +32,7 @@ export default function UploadFile ({ editorRef }) {
         type='button'
         aria-label='File Upload Icon'
         onClick={() => fileInputRef.current?.click()}
-        className='flex items-center gap-x-1 btn-border px-3 py-[7px] cursor-pointer'
+        className='flex items-center gap-x-1 btn-border px-4 py-[7px] cursor-pointer'
       >
         <FileUploadIcon />
         <span>Upload file</span>

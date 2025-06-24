@@ -1,13 +1,20 @@
 export const downloadFile = ({ fileName, fileContent }) => {
-  if (!fileName || !fileContent) return
+  if (!fileContent) return
 
-  // The spaces are replaced with underscores
-  let fileWithUnderscores = fileName.trim().replace(/\s+/g, '_')
+  // If empty, use ‘file.json’.
+  let cleanedName = fileName?.trim() || ''
 
-  if (!fileWithUnderscores.endsWith('.json')) {
-    fileWithUnderscores += '.json'
+  if (!cleanedName) {
+    cleanedName = 'file'
+  } else {
+    // If there are words separated by spaces, replace them with underscore
+    cleanedName = cleanedName.replace(/\s+/g, '_')
   }
 
+  // Make sure it ends in .json
+  if (!cleanedName.endsWith('.json')) {
+    cleanedName += '.json'
+  }
   const blob = new Blob([JSON.stringify(fileContent, null, 2)], {
     type: 'application/json'
   })
@@ -15,8 +22,7 @@ export const downloadFile = ({ fileName, fileContent }) => {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.download = fileWithUnderscores
-  // link.download = fileWithUnderscores || 'file.json'
+  link.download = cleanedName
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)

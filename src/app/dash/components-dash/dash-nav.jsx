@@ -18,14 +18,14 @@ export default function DashNav () {
       </div>
 
       <div className='flex items-center gap-x-2.5'>
-        <span className='hidden'>
-          <GetSessionStatus />
-        </span>
+        <GetSessionStatus />
         <HomeBtn />
         <span className='z-40'>
           <Modal />
         </span>
-        <UserAvatar />
+        <span className='hidden md:inline'>
+          <UserAvatar />
+        </span>
       </div>
     </header>
   )
