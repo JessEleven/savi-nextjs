@@ -1,5 +1,5 @@
 import Nav from '@/components/nav'
-import { HeartIcon, KeyframeFilledIcon, TrashIcon } from './dash/assets/dash-icons'
+import { FocusIcon, HeartIcon, TrashIcon } from './dash/assets/dash-icons'
 import Footer from '@/components/ui/footer'
 
 const elements = [
@@ -40,7 +40,7 @@ export default function Home () {
             <div className='flex items-center justify-between gap-x-5 px-5 py-2.5 rounded-lg bg-neutral-800'>
               <div className='flex flex-col space-y-1 truncate'>
                 <div className='flex items-center gap-x-1'>
-                  <KeyframeFilledIcon className='text-cyan-600' />
+                  <FocusIcon className='text-cyan-600' />
                   <h3 className='font-medium'>{item.name}</h3>
                 </div>
                 <h3 className='truncate text-sm text-neutral-400'>{item.date}</h3>
