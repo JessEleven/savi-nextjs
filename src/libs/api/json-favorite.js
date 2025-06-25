@@ -19,7 +19,7 @@ export const getAllJsonFavorite = async () => {
 
 export const toggleFavorite = async ({ id, favorite, onSuccess }) => {
   try {
-    const response = await fetch('/api/favorite-linkbox', {
+    const response = await fetch('/api/json-favorite', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, favorite: !favorite })

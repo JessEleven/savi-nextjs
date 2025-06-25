@@ -1,4 +1,8 @@
+import { usePathname } from 'next/navigation'
+
 export default function SkeletonCard () {
+  const pathname = usePathname()
+
   return (
     <div className='mt-7 flex flex-col gap-y-3 card-container'>
       {Array.from({ length: 6 }).map((_, index) => (
@@ -10,8 +14,10 @@ export default function SkeletonCard () {
             </div>
 
             <div className='flex items-center gap-x-2.5'>
-              <div className='size-8 bg-neutral-600 rounded-[5px]' />
-              <div className='size-8 bg-neutral-600 rounded-[5px]' />
+              <div className='hidden size-8 bg-neutral-600 rounded-[5px]' />
+              {pathname === '/dash' && (
+                <div className='size-8 bg-neutral-600 rounded-[5px]' />
+              )}
               <div className='size-8 bg-neutral-600 rounded-[5px]' />
             </div>
           </div>

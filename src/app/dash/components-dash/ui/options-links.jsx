@@ -1,11 +1,20 @@
 import Link from 'next/link'
 import Text from './text'
 import { HeartIcon, PlusIcon, RefreshIcon } from '../../assets/dash-icons'
+import { usePathname } from 'next/navigation'
 
-export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasItems, queryTime }) {
+export default function OptionsLinks ({
+  allFiles,
+  handleRefresh,
+  loading,
+  hasItems,
+  queryTime
+}) {
+  const pathname = usePathname()
+
   return (
     <div className='flex items-center justify-between mb-7'>
-      <Text name='Your files' />
+      <Text name={pathname === '/dash' ? 'Your files' : 'Your favorites'} />
 
       <div className='flex items-center justify-between gap-x-2.5'>
         {hasItems && (
@@ -26,12 +35,12 @@ export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasIte
         <Link href='/dash/new' className='block px-2 md:px-4 py-2 btn-bg'>
           <div className='flex items-center'>
             <PlusIcon />
-            <span className='hidden md:inline md:ml-1'>New file</span>
+            <span className='hidden md:inline md:ml-1'>New file {hasItems}</span>
           </div>
         </Link>
 
-        {hasItems && (
-          <Link href='#' className='block px-[7px] md:px-4 py-[7px] btn-border'>
+        {pathname === '/dash' && (
+          <Link href='/dash/favorite' className='block px-[7px] md:px-4 py-[7px] btn-border'>
             <div className='flex items-center'>
               <HeartIcon />
               <span className='hidden md:inline md:ml-1'>Favorites</span>

@@ -1,18 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { FocusIcon, HeartIcon, TrashIcon } from './assets/dash-icons'
-import SkeletonCard from './components-dash/ui/skeleton-card'
-import ErrorFetching from './components-dash/ui/error-fetching'
+import { FocusIcon, HeartFilledIcon } from '../assets/dash-icons'
+import SkeletonCard from '../components-dash/ui/skeleton-card'
+import ErrorFetching from '../components-dash/ui/error-fetching'
 import { toast } from 'sonner'
-import OptionsLinks from './components-dash/ui/options-links'
-import EmptyList from './components-dash/ui/empty-list'
-import { toggleFavorite } from '@/libs/api/json-favorite'
+import OptionsLinks from '../components-dash/ui/options-links'
+import EmptyList from '../components-dash/ui/empty-list'
+import { getAllJsonFavorite, toggleFavorite } from '@/libs/api/json-favorite'
 
-export default function DashPage () {
+export default function FavoritePage () {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -26,7 +25,7 @@ export default function DashPage () {
       try {
         setLoading(true)
         const start = performance.now()
-        const storage = await getAllJsonStorage()
+        const storage = await getAllJsonFavorite()
         const end = performance.now()
         setQueryTime(Math.round(end - start))
         setData(storage)
@@ -62,7 +61,7 @@ export default function DashPage () {
       />
       {loading && <SkeletonCard />}
       {(error && !loading) && <ErrorFetching />}
-      {(!loading && !error && data.length <= 0) && <EmptyList message='No files were found' />}
+      {(!loading && !error && data.length <= 0) && <EmptyList message='No favorite files found' />}
       {(!loading && !error && data.length > 0) && (
         <div
           ref={scrollRef}
@@ -82,45 +81,25 @@ export default function DashPage () {
                     </h3>
                   </div>
 
-                  <div className='flex items-center gap-x-2.5'>
-                    <button
-                      type='button'
-                      aria-label='Heart Icon'
-                      className='btn-border-icon'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        toggleFavorite({
-                          id: item.id,
-                          favorite: item.favorite,
-                          onSuccess: () => {
-                            setData((prev) => prev.filter((heart) => heart.id !== item.id))
-                          }
-                        })
-                        toast.success('File added to favorites')
-                      }}
-                    >
-                      <HeartIcon />
-                    </button>
-                    <button
-                      type='button'
-                      aria-label='Trash Icon'
-                      className='btn-border-icon'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        deleteJsonStorage({
-                          id: item.id,
-                          onSuccess: () => {
-                            setData((prev) => prev.filter((storage) => storage.id !== item.id))
-                          }
-                        })
-                        toast.success('File deleted successfully')
-                      }}
-                    >
-                      <TrashIcon />
-                    </button>
-                  </div>
+                  <button
+                    type='button'
+                    aria-label='Heart Filled Icon'
+                    className='btn-border-icon'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      toggleFavorite({
+                        id: item.id,
+                        favorite: item.favorite,
+                        onSuccess: () => {
+                          setData((prev) => prev.filter((noHeart) => noHeart.id !== item.id))
+                        }
+                      })
+                      toast.success('File removed from favorites')
+                    }}
+                  >
+                    <HeartFilledIcon />
+                  </button>
                 </div>
               </article>
             </Link>
