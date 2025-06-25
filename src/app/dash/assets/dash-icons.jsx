@@ -239,21 +239,22 @@ export const CheckIcon = (props) => (
   </svg>
 )
 
-export const KeyframeFilledIcon = (props) => (
+export const FocusIcon = (props) => (
   <svg
-    width={20}
-    height={20}
+    width={18}
+    height={18}
     viewBox='0 0 24 24'
-    fill='currentColor'
+    fill='none'
     stroke='currentColor'
     strokeWidth={2}
     strokeLinecap='round'
     strokeLinejoin='round'
-    className='icon icon-tabler icons-tabler-filled icon-tabler-keyframe'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-focus'
     {...props}
   >
     <path stroke='none' d='M0 0h24v24H0z' fill='none' />
-    <path d='M12 4a2.599 2.599 0 0 0 -2 .957l-4.355 5.24a2.847 2.847 0 0 0 -.007 3.598l4.368 5.256c.499 .6 1.225 .949 1.994 .949a2.599 2.599 0 0 0 2 -.957l4.355 -5.24a2.847 2.847 0 0 0 .007 -3.598l-4.368 -5.256a2.593 2.593 0 0 0 -1.994 -.949z' />
+    <circle cx={12} cy={12} r={0.5} fill='currentColor' />
+    <path d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' />
   </svg>
 )
 
@@ -395,5 +396,64 @@ export const RefreshIcon = (props) => (
     <path stroke='none' d='M0 0h24v24H0z' fill='none' />
     <path d='M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4' />
     <path d='M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4' />
+  </svg>
+)
+
+export const ShieldCleckIcon = (props) => (
+  <svg
+    width={20}
+    height={20}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-shield-check'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06' />
+    <path d='M15 19l2 2l4 -4' />
+  </svg>
+)
+
+export const UserCircleIcon = (props) => (
+  <svg
+    width={20}
+    height={20}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-user-circle'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' />
+    <path d='M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0' />
+    <path d='M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855' />
+  </svg>
+)
+
+export const BroadcastIcon = (props) => (
+  <svg
+    width={20}
+    height={20}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-broadcast'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M18.364 19.364a9 9 0 1 0 -12.728 0' />
+    <path d='M15.536 16.536a5 5 0 1 0 -7.072 0' />
+    <path d='M12 13m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' />
   </svg>
 )

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { HeartIcon, KeyframeFilledIcon, TrashIcon } from './assets/dash-icons'
+import { FocusIcon, HeartIcon, TrashIcon } from './assets/dash-icons'
 import SkeletonCard from './components-dash/ui/skeleton-card'
 import ErrorFetching from './components-dash/ui/error-fetching'
 import { toast } from 'sonner'
@@ -18,12 +18,16 @@ export default function DashPage () {
   const scrollRef = useRef(null)
   const [hasScrollbar, setHasScrollbar] = useState(false)
   const [refresh, setRefresh] = useState(false)
+  const [queryTime, setQueryTime] = useState(0)
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true)
+        const start = performance.now()
         const storage = await getAllJsonStorage()
+        const end = performance.now()
+        setQueryTime(Math.round(end - start))
         setData(storage)
       } catch (error) {
         setError(error)
@@ -53,6 +57,7 @@ export default function DashPage () {
         handleRefresh={handleRefresh}
         loading={loading}
         hasItems={data.length > 0}
+        queryTime={queryTime}
       />
       {loading && <SkeletonCard />}
       {(error && !loading) && <ErrorFetching />}
@@ -68,8 +73,8 @@ export default function DashPage () {
                 <div className='flex items-center justify-between gap-x-5'>
                   <div className='flex flex-col space-y-1 truncate'>
                     <div className='flex items-center gap-x-1'>
-                      <KeyframeFilledIcon className='text-cyan-600' />
-                      <h3 className='truncate font-medium'>{item.fileName}</h3>
+                      <FocusIcon className='text-cyan-600' />
+                      <h3 className='text-[16px] font-medium truncate'>{item.fileName}</h3>
                     </div>
                     <h3 className='truncate text-sm text-neutral-400'>
                       {dayjs(item.createdAt).format('MMMM DD, YYYY • hh:mm a')}

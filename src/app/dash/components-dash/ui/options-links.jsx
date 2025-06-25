@@ -2,14 +2,16 @@ import Link from 'next/link'
 import Text from './text'
 import { HeartIcon, PlusIcon, RefreshIcon } from '../../assets/dash-icons'
 
-export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasItems }) {
+export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasItems, queryTime }) {
   return (
     <div className='flex items-center justify-between mb-7'>
       <Text name='Your files' />
 
       <div className='flex items-center justify-between gap-x-2.5'>
         {hasItems && (
-          <h3 className='text-sm text-neutral-400'>{allFiles} files</h3>
+          <h3 className='text-sm text-neutral-400'>
+            {allFiles} {allFiles === 1 ? 'file' : 'files'} • {queryTime} ms
+          </h3>
         )}
 
         <button
@@ -28,7 +30,7 @@ export default function OptionsLinks ({ allFiles, handleRefresh, loading, hasIte
           </div>
         </Link>
 
-        {(hasItems || loading) && (
+        {hasItems && (
           <Link href='#' className='block px-[7px] md:px-4 py-[7px] btn-border'>
             <div className='flex items-center'>
               <HeartIcon />

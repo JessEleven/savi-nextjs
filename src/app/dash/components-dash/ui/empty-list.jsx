@@ -8,7 +8,7 @@ export default function EmptyList ({ message }) {
       <ClockCirceIcon />
       <h3 className='text-neutral-400 -mt-1.5'>{message}</h3>
       <Link href='/dash/new' className='block mt-2 btn-bg'>
-        <div className='flex items-center gap-x-1 py-2'>
+        <div className='flex items-center gap-x-1 px-4 py-2'>
           <PlusIcon />
           <span>New file</span>
         </div>

@@ -205,7 +205,12 @@ export default function NewPage () {
 
           <div className='flex justify-end gap-x-3 mt-7'>
             <Link href='/dash' className='block px-4 py-[7px] btn-border'>Cancel</Link>
-            <button type='submit' className='px-4 py-[9px] btn-bg cursor-pointer disabled:cursor-none' disabled={!isValid}>Save</button>
+            <button
+              type='submit'
+              disabled={!isValid}
+              className='px-4 py-[9px] btn-bg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+            >Save
+            </button>
           </div>
         </form>
       </article>
