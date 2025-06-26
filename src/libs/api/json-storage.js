@@ -7,13 +7,34 @@ export const getAllJsonStorage = async () => {
       headers: { 'Content-Type': 'application/json' }
     })
     const result = await response.json()
+    // console.log('response from API', result)
 
     if (!response.ok || !result.success) {
       throw new Error(result.error || 'Failed to fetch JSON storages')
     }
     return result.data
   } catch (error) {
-    return error.message
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+export const getJsonStorageById = async (id) => {
+  try {
+    const response = await fetch(`/api/json-storage/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    const result = response.json()
+    // console.log('response from API', result)
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to fetch JSON storage')
+    }
+    return result.data
+  } catch (error) {
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
   }
 }
 
@@ -34,9 +55,12 @@ export const createJsonStorage = async (formData) => {
       })
     })
     const result = await response.json()
+    // console.log('response from API', result)
+
     return result
   } catch (error) {
-    return error.message
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
   }
 }
 
@@ -48,6 +72,7 @@ export const deleteJsonStorage = async ({ id, onSuccess }) => {
       body: JSON.stringify({ id })
     })
     const result = await response.json()
+    // console.log('response from API', result)
 
     if (!response.ok || !result.success) {
       throw new Error(result.error || 'Failed to delete the JSON file')
@@ -57,6 +82,7 @@ export const deleteJsonStorage = async ({ id, onSuccess }) => {
 
     return result.data
   } catch (error) {
-    return error.message
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
   }
 }

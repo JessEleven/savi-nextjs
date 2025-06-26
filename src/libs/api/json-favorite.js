@@ -12,7 +12,25 @@ export const getAllJsonFavorite = async () => {
     }
     return result.data
   } catch (error) {
-    // console.error('Error fetching json storage:', error)
+    // console.error('Error fetching json favorite:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+export const getJsonFavoriteById = async (id) => {
+  try {
+    const response = await fetch(`/api/json-favorite/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    const result = response.json()
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to fetch JSON favorite')
+    }
+    return result.data
+  } catch (error) {
+    // console.error('Error fetching json favorite:', error)
     return { success: false, error: error.message }
   }
 }
