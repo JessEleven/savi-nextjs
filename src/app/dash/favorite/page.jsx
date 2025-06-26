@@ -68,7 +68,7 @@ export default function FavoritePage () {
           className={`flex flex-col gap-y-3 h-[480px] overflow-y-auto scrollbar-custom ${hasScrollbar ? 'pr-1.5' : ''}`}
         >
           {data.map((item) => (
-            <Link key={item.id} href={`/dash/${item.id}`} className='block'>
+            <Link key={item.id} href={`/dash/${item.id}?from=favorite`} className='block'>
               <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>
                 <div className='flex items-center justify-between gap-x-5'>
                   <div className='flex flex-col space-y-1 truncate'>

@@ -23,7 +23,8 @@ export const getJsonFavoriteById = async (id) => {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
-    const result = response.json()
+    const result = await response.json()
+    // console.log('response from API', result)
 
     if (!response.ok || !result.success) {
       throw new Error(result.error || 'Failed to fetch JSON favorite')

@@ -1,6 +1,5 @@
 'use client'
 
-import { getAllJsonStorage } from '@/libs/api/json-storage'
 import Editor from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import ErrorFetching from '../components-dash/ui/error-fetching'
@@ -10,18 +9,26 @@ import { downloadFile } from '@/utils/download'
 import DownloadFile from '../components-dash/ui/download-file'
 import Clipboard from '../components-dash/ui/clipboard'
 import { copySavedFile } from '@/utils/clipboard'
+import { useSearchParams } from 'next/navigation'
+import { getJsonStorageById } from '@/libs/api/json-storage'
+import { getJsonFavoriteById } from '@/libs/api/json-favorite'
 
 export default function GetPageId ({ params }) {
   const { id } = params
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
+  const searchParams = useSearchParams()
+
+  const from = searchParams.get('from')
 
   useEffect(() => {
     (async () => {
       try {
-        const allFiles = await getAllJsonStorage()
-        const currentFile = allFiles.find((item) => item.id === id)
-        setData(currentFile)
+        const file = (from === 'favorite'
+          ? await getJsonFavoriteById(id)
+          : await getJsonStorageById(id)
+        )
+        setData(file)
       } catch (error) {
         // console.error('Error fetching file:', error)
         setError(error)
