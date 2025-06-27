@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { FocusIcon, HeartFilledIcon } from '../assets/dash-icons'
-import SkeletonCard from '../components-dash/ui/skeleton-card'
+import { FocusIcon, StarIcon } from '../assets/dash-icons'
+import { SkeletonCard } from '../components-dash/ui/skeletons'
 import ErrorFetching from '../components-dash/ui/error-fetching'
 import { toast } from 'sonner'
-import OptionsLinks from '../components-dash/ui/options-links'
+import FileHeaderBar from '../components-dash/ui/file-header-bar'
 import EmptyList from '../components-dash/ui/empty-list'
 import { getAllJsonFavorite, toggleFavorite } from '@/libs/api/json-favorite'
 
@@ -52,7 +52,7 @@ export default function FavoritePage () {
 
   return (
     <main className='mt-7 card-container'>
-      <OptionsLinks
+      <FileHeaderBar
         allFiles={data.length}
         handleRefresh={handleRefresh}
         loading={loading}
@@ -71,6 +71,7 @@ export default function FavoritePage () {
             <Link key={item.id} href={`/dash/${item.id}?from=favorite`} className='block'>
               <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-teal-600 transition-all duration-300 ease-in-out'>
                 <div className='flex items-center justify-between gap-x-5'>
+                  {/* File content */}
                   <div className='flex flex-col space-y-1 truncate'>
                     <div className='flex items-center gap-x-1'>
                       <FocusIcon className='text-cyan-600' />
@@ -81,9 +82,10 @@ export default function FavoritePage () {
                     </h3>
                   </div>
 
+                  {/* Remove from favorites */}
                   <button
                     type='button'
-                    aria-label='Heart Filled Icon'
+                    aria-label='Star Icon'
                     className='btn-border-icon'
                     onClick={(e) => {
                       e.preventDefault()
@@ -98,7 +100,7 @@ export default function FavoritePage () {
                       toast.success('File removed from favorites')
                     }}
                   >
-                    <HeartFilledIcon />
+                    <StarIcon className='text-yellow-400' />
                   </button>
                 </div>
               </article>

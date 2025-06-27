@@ -5,7 +5,11 @@ import { authClient } from '@/libs/auth-client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { ShieldCleckIcon } from '../../assets/dash-icons'
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ShieldCleckIcon
+} from '../../assets/dash-icons'
 
 export default function DeleteAccount () {
   const [input, setInput] = useState('')
@@ -35,9 +39,14 @@ export default function DeleteAccount () {
     <>
       <div className='w-full my-2.5 border border-neutral-600' />
 
-      <div onClick={() => setOpen(!open)} className='w-fit flex items-center gap-x-1 text-stone-400 cursor-pointer'>
-        <ShieldCleckIcon />
-        <h3 className='text-lg font-medium'>Security</h3>
+      <div className='w-full flex items-center justify-between text-stone-400'>
+        <div className='flex items-center gap-x-1 cursor-pointer' onClick={() => setOpen(!open)}>
+          <ShieldCleckIcon />
+          <h3 className='text-lg font-medium'>Security</h3>
+        </div>
+        <span className='text-neutral-50 btn-border-icon cursor-pointer' onClick={() => setOpen(!open)}>
+          {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+        </span>
       </div>
 
       {open && (

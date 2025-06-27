@@ -1,9 +1,10 @@
 'use client'
 
 import { SlashIcon } from '../../assets/dash-icons'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { getAllJsonStorage } from '@/libs/api/json-storage'
+import { getAllJsonFavorite } from '@/libs/api/json-favorite'
 import { authClient } from '@/libs/auth-client'
 
 export function GetUserName () {
@@ -33,15 +34,20 @@ export function GetUserName () {
 export function GetFileName () {
   const { id } = useParams()
   const [fileName, setFileName] = useState(null)
+  const searchParams = useSearchParams()
+
+  const from = searchParams.get('from')
 
   useEffect(() => {
     if (!id) return
 
-    getAllJsonStorage().then((files) => {
+    (async () => {
+      const getFiles = (from === 'favorite' ? getAllJsonFavorite : getAllJsonStorage)
+      const files = await getFiles()
       const file = files.find((item) => item.id === id)
       setFileName(file?.fileName ?? 'Unnamed')
-    })
-  }, [id])
+    })()
+  }, [id, from])
 
   // If there is no ID e.g. /dash
   if (!id) return null

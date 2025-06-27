@@ -208,7 +208,7 @@ export default function NewPage () {
             <button
               type='submit'
               disabled={!isValid}
-              className='px-4 py-[9px] btn-bg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+              className='px-4 py-[8.5px] btn-bg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
             >Save
             </button>
           </div>

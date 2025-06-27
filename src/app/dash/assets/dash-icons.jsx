@@ -141,6 +141,24 @@ export const HeartIcon = (props) => (
   </svg>
 )
 
+export const StarIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-star'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z' />
+  </svg>
+)
+
 export const TrashIcon = (props) => (
   <svg
     width={16}
@@ -455,5 +473,41 @@ export const BroadcastIcon = (props) => (
     <path d='M18.364 19.364a9 9 0 1 0 -12.728 0' />
     <path d='M15.536 16.536a5 5 0 1 0 -7.072 0' />
     <path d='M12 13m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' />
+  </svg>
+)
+
+export const ChevronUpIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-chevron-up'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M6 15l6 -6l6 6' />
+  </svg>
+)
+
+export const ChevronDownIcon = (props) => (
+  <svg
+    width={16}
+    height={16}
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth={2}
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='icon icon-tabler icons-tabler-outline icon-tabler-chevron-down'
+    {...props}
+  >
+    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+    <path d='M6 9l6 6l6 -6' />
   </svg>
 )

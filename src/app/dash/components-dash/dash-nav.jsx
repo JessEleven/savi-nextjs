@@ -2,9 +2,9 @@ import AppLogo from '@/components/ui/app-logo'
 import Link from 'next/link'
 import UserAvatar from './ui/user-avatar'
 import GetSessionStatus from './ui/get-session-status'
-import HomeBtn from './ui/home-btn'
 import { GetUserName, GetFileName } from './ui/breadcrumbs'
 import Modal from './modals/modal'
+import { FavoriteBtn, HomeBtn, NewFileBtn } from './ui/dash-nav-buttons'
 
 export default function DashNav () {
   return (
@@ -19,7 +19,9 @@ export default function DashNav () {
 
       <div className='flex items-center gap-x-2.5'>
         <GetSessionStatus />
+        <NewFileBtn />
         <HomeBtn />
+        <FavoriteBtn />
         <span className='z-40'>
           <Modal />
         </span>

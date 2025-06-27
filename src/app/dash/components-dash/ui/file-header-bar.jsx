@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Text from './text'
-import { HeartIcon, PlusIcon, RefreshIcon } from '../../assets/dash-icons'
+import { PlusIcon, RefreshIcon, StarIcon } from '../../assets/dash-icons'
 import { usePathname } from 'next/navigation'
 
-export default function OptionsLinks ({
+export default function FileHeaderBar ({
   allFiles,
   handleRefresh,
   loading,
@@ -32,17 +32,17 @@ export default function OptionsLinks ({
           {loading ? <RefreshIcon className='animate-spin' /> : <RefreshIcon />}
         </button>
 
-        <Link href='/dash/new' className='block px-2 md:px-4 py-2 btn-bg'>
+        <Link href='/dash/new' className='block px-2 md:px-4 py-[7.5px] btn-bg'>
           <div className='flex items-center'>
             <PlusIcon />
-            <span className='hidden md:inline md:ml-1'>New file {hasItems}</span>
+            <span className='hidden md:inline md:ml-1'>New file</span>
           </div>
         </Link>
 
         {pathname === '/dash' && (
           <Link href='/dash/favorite' className='block px-[7px] md:px-4 py-[7px] btn-border'>
             <div className='flex items-center'>
-              <HeartIcon />
+              <StarIcon />
               <span className='hidden md:inline md:ml-1'>Favorites</span>
             </div>
           </Link>
