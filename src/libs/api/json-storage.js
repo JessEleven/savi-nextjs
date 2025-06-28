@@ -19,25 +19,6 @@ export const getAllJsonStorage = async () => {
   }
 }
 
-export const getJsonStorageById = async (id) => {
-  try {
-    const response = await fetch(`/api/json-storage/${id}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-    const result = await response.json()
-    // console.log('response from API', result)
-
-    if (!response.ok || !result.success) {
-      throw new Error(result.error || 'Failed to fetch JSON storage')
-    }
-    return result.data
-  } catch (error) {
-    // console.error('Error fetching json storage:', error)
-    return { success: false, error: error.message }
-  }
-}
-
 export const createJsonStorage = async (formData) => {
   try {
     const { data } = await authClient.getSession()
@@ -58,6 +39,52 @@ export const createJsonStorage = async (formData) => {
     // console.log('response from API', result)
 
     return result
+  } catch (error) {
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+export const getJsonStorageById = async (id) => {
+  try {
+    const response = await fetch(`/api/json-storage/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    const result = await response.json()
+    // console.log('response from API', result)
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to fetch JSON storage')
+    }
+    return result.data
+  } catch (error) {
+    // console.error('Error fetching json storage:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+export const updateJsonStorage = async ({ id, formData }) => {
+  try {
+    const { data } = await authClient.getSession()
+    const user = data?.user
+
+    if (!user) {
+      throw new Error('User is not authenticated')
+    }
+
+    const response = await fetch(`/api/json-storage/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData })
+    })
+    const result = await response.json()
+    // console.log('response from API', result)
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || 'Failed to update JSON storage')
+    }
+    return result.data
   } catch (error) {
     // console.error('Error fetching json storage:', error)
     return { success: false, error: error.message }
