@@ -19,36 +19,38 @@ export default function SignInForm () {
   }
 
   return (
-    <main className='main-container relative min-h-screen flex flex-col items-center justify-center'>
-      <div className='w-full md:w-96 mx-16'>
-        <div className='mx-5 md:mx-0'>
-          <div className='flex justify-center mb-5'>
-            <AppLogo size={56} />
-          </div>
+    <main className='bg-[#292c2e]'>
+      <div className='relative min-h-screen main-container flex flex-col items-center justify-center'>
+        <div className='w-full md:w-96'>
+          <div className='mx-5 md:mx-0'>
+            <div className='flex justify-center mb-5'>
+              <AppLogo iconSize={54} />
+            </div>
 
-          <h2 className='text-2xl font-medium'>Welcome back</h2>
-          <h3 className='mb-5 text-base text-neutral-400'>Sign in to create a JSON file</h3>
+            <h2 className='text-2xl font-medium'>Welcome back</h2>
+            <h3 className='mb-5 text-base text-neutral-400'>Sign in to create a JSON file</h3>
 
-          <button
-            type='button'
-            aria-label='GitHub Icon'
-            className='session-btn'
-            onClick={signInWithGithub}
-          >
-            <GitHubIcon />
-            <span>Continue with GitHub</span>
-          </button>
+            <button
+              type='button'
+              aria-label='GitHub Icon'
+              className='session-btn'
+              onClick={signInWithGithub}
+            >
+              <GitHubIcon />
+              <span>Continue with GitHub</span>
+            </button>
 
-          <div className='w-fit mx-auto mt-5'>
-            <Link href='/' className='flex items-center justify-center gap-x-1 group'>
-              <span className='text-sm'>Go to the landing page</span>
-              <ArrowRight className='group-hover:text-rose-400 transition-colors ease-in-out duration-200 mt-[1.5px]' />
-            </Link>
+            <div className='w-fit mx-auto mt-5'>
+              <Link href='/' className='flex items-center justify-center gap-x-1 group'>
+                <span className='text-sm leading-3.5'>Go to the landing page</span>
+                <ArrowRight className='group-hover:text-cyan-500 transition-colors ease-in-out duration-200 mt-[1.5px]' />
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <Footer />
+        <Footer />
+      </div>
     </main>
   )
 }

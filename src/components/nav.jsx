@@ -6,7 +6,7 @@ export default async function Nav () {
   return (
     <header className='h-[60px] flex items-center justify-between'>
       <Link translate='no' href='/' className='block'>
-        <AppLogo size={24} showText fontSize={20} />
+        <AppLogo iconSize={26} showText fontSize={20} />
       </Link>
 
       <UserSession />

@@ -2,7 +2,6 @@ import { auth } from '@/libs/auth'
 import { GitHubIcon } from '@/resources/assets/main-icons'
 import { headers } from 'next/headers'
 import Link from 'next/link'
-import SignOut from './sign-out'
 
 export default async function UserSession () {
   let session = null
@@ -20,11 +19,11 @@ export default async function UserSession () {
       <ul className='flex items-center gap-x-2.5 list-none'>
         <li>
           <a
-            className='btn-border-icon block'
             href='https://github.com/JessEleven/savi-nextjs'
             rel='noreferrer'
             target='_blank'
             aria-label='GitHub Icon'
+            className='btn-border-icon block'
           >
             <GitHubIcon />
           </a>
@@ -34,19 +33,16 @@ export default async function UserSession () {
           ? (
             <>
               <li>
-                <Link href='/dash' className='block px-4 py-[9px] btn-bg'>
+                <Link href='/dash' className='block px-4 py-[8.5px] btn-bg'>
                   Dashboard
                 </Link>
-              </li>
-              <li>
-                <SignOut text />
               </li>
             </>
             )
           : (
             <>
               <li>
-                <Link href='/sign-in' className='block px-4 py-[9px] btn-bg'>
+                <Link href='/sign-in' className='block px-4 py-[8.5px] btn-bg'>
                   Sign In
                 </Link>
               </li>

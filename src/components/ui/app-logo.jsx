@@ -2,14 +2,20 @@ import Image from 'next/image'
 import Logo from '../../../public/logo.svg'
 import clsx from 'clsx'
 
+const iconSizeMap = {
+  18: 'w-[18px] h-[18px]',
+  26: 'w-[26px] h-[26px]',
+  54: 'w-[54px] h-[54px'
+}
+
 const fontSizeMap = {
-  12: 'text-sm 2xl:text-sm',
-  20: 'text-xl md:text-2xl'
+  12: 'text-sm',
+  20: 'text-xl'
 }
 
 export default function AppLogo ({
   showText = false,
-  size,
+  iconSize,
   fontSize
 }) {
   return (
@@ -17,7 +23,8 @@ export default function AppLogo ({
       <Image
         src={Logo}
         alt='Logo'
-        style={{ width: `${size}px`, height: `${size}px` }}
+        className={clsx(iconSizeMap[iconSize])}
+        // style={{ width: `${iconSize}px`, height: `${iconSize}px` }}
         priority
       />
       {showText && (

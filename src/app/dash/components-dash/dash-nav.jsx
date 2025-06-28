@@ -11,7 +11,7 @@ export default function DashNav () {
     <header className='h-[60px] flex items-center justify-between'>
       <div className='flex items-center'>
         <Link translate='no' href='/dash'>
-          <AppLogo size={24} showText fontSize={20} />
+          <AppLogo iconSize={26} showText fontSize={20} />
         </Link>
         <GetUserName />
         <GetFileName />

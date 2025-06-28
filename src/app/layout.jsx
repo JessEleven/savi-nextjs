@@ -18,9 +18,7 @@ export default function RootLayout ({ children }) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`${roboto.className} bg-neutral-800 text-neutral-50`}>
-        <div className='mx-5 md:mx-0'>
-          {children}
-        </div>
+        {children}
         <Toaster
           position='top-right'
           expand={false}
