@@ -87,7 +87,7 @@ export async function PATCH (req, { params }) {
       return NextResponse.json({
         success: false,
         status_code: 400,
-        message: 'ID is missing to delete the JSON file'
+        message: 'ID is missing to update the JSON file'
       }, { status: 400 })
     }
     const { fileName, fileContent } = await req.json()
@@ -99,7 +99,8 @@ export async function PATCH (req, { params }) {
       })
       .where(and(
         eq(jsonStorage.id, id),
-        eq(jsonStorage.userId, user.id)
+        eq(jsonStorage.userId, user.id),
+        eq(jsonStorage.favorite, false)
       ))
 
     return NextResponse.json({
