@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { DotsIcon, FocusIcon, StarIcon, TrashIcon } from './assets/dash-icons'
+import { DotsIcon, EditIcon, FocusIcon, StarIcon, TrashIcon } from './assets/dash-icons'
 import { SkeletonCard } from './components-dash/ui/skeletons'
 import ErrorFetching from './components-dash/ui/error-fetching'
 import { toast } from 'sonner'
@@ -123,7 +123,15 @@ export default function DashPage () {
 
                       {(openById === item.id) && (
                         <div className='absolute top-[41px] right-0 z-40 cursor-default' onClick={(e) => e.preventDefault()}>
-                          <div className='w-[100px] p-2.5 rounded-md border border-neutral-600 bg-neutral-800'>
+                          <div className='w-[100px] p-2.5 space-y-1.5 rounded-md border border-neutral-600 bg-neutral-800'>
+                            {/* Update an item */}
+                            <Link href={`/dash/${item.id}/edit`} className='block w-fit group'>
+                              <div className='flex items-center gap-x-1'>
+                                <EditIcon className='text-purple-500 md:text-current group-hover:text-purple-500 transition-colors duration-200 ease-in-out' />
+                                <span>Edit</span>
+                              </div>
+                            </Link>
+
                             {/* Delete an item */}
                             <button
                               type='button'

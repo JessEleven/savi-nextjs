@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { FocusIcon, StarIcon } from '../assets/dash-icons'
+import { EditIcon, FocusIcon, StarIcon } from '../assets/dash-icons'
 import { SkeletonCard } from '../components-dash/ui/skeletons'
 import ErrorFetching from '../components-dash/ui/error-fetching'
 import { toast } from 'sonner'
@@ -82,26 +82,33 @@ export default function FavoritePage () {
                     </h3>
                   </div>
 
-                  {/* Remove from favorites */}
-                  <button
-                    type='button'
-                    aria-label='Star Icon'
-                    className='btn-border-icon'
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      toggleFavorite({
-                        id: item.id,
-                        favorite: item.favorite,
-                        onSuccess: () => {
-                          setData((prev) => prev.filter((noHeart) => noHeart.id !== item.id))
-                        }
-                      })
-                      toast.success('File removed from favorites')
-                    }}
-                  >
-                    <StarIcon className='text-yellow-400' />
-                  </button>
+                  <div className='flex items-center gap-x-2.5'>
+                    {/* Update an item */}
+                    <Link href={`/dash/${item.id}/edit?from=fav`} className='block btn-border-icon'>
+                      <EditIcon />
+                    </Link>
+
+                    {/* Remove from favorites */}
+                    <button
+                      type='button'
+                      aria-label='Star Icon'
+                      className='btn-border-icon'
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        toggleFavorite({
+                          id: item.id,
+                          favorite: item.favorite,
+                          onSuccess: () => {
+                            setData((prev) => prev.filter((noHeart) => noHeart.id !== item.id))
+                          }
+                        })
+                        toast.success('File removed from favorites')
+                      }}
+                    >
+                      <StarIcon className='text-yellow-400' />
+                    </button>
+                  </div>
                 </div>
               </article>
             </Link>
