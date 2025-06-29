@@ -47,7 +47,8 @@ export default function NewPage () {
       reset()
       router.push('/dash')
     } catch (error) {
-      console.error('Unexpected error:', error)
+      // console.error('Invalid JSON:', error)
+      toast.error('Invalid JSON or failed to create')
     }
   }
 
@@ -94,7 +95,7 @@ export default function NewPage () {
       parsed = JSON.parse(fileContent)
     } catch (error) {
       // console.error('Invalid JSON structure:', error)
-      return toast.error('Check the structure of the JSON')
+      return toast.error('Invalid JSON structure')
     }
 
     const isEmptyJson =
@@ -203,7 +204,7 @@ export default function NewPage () {
             )}
           </div>
 
-          <div className='flex justify-end gap-x-3 mt-7'>
+          <div className='flex justify-end gap-x-2.5 mt-7'>
             <Link href='/dash' className='block px-4 py-[7px] btn-border'>Cancel</Link>
             <button
               type='submit'

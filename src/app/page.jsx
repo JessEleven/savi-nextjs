@@ -9,11 +9,11 @@ const elements = [
   },
   {
     name: 'Users',
-    date: 'June 18, 2025 • 12:18 am'
+    date: 'February 18, 2025 • 12:18 am'
   },
   {
     name: 'Server config',
-    date: 'September 29, 2025 • 05:25 pm'
+    date: 'July 29, 2025 • 05:25 pm'
   }
 ]
 
@@ -26,7 +26,7 @@ export default function Home () {
 
           <section role='region' aria-label='Description of the application' className='mt-14'>
             <h1 className='relative text-3xl md:text-4xl text-center font-bold'>
-              <span className='underline decoration-2 decoration-wavy decoration-green-500'>Create</span> <span className='text-teal-600'>JSON</span>{' '}
+              <span className='underline decoration-2 decoration-wavy decoration-green-500'>Creates</span> <span className='text-teal-600'>JSON</span>{' '}
               <span className='text-neutral-50'>files or <span className='underline decoration-2 decoration-wavy decoration-purple-500'>upload</span> them</span>
             </h1>
             <h3 className='w-full md:w-1/2 mx-auto text-center mt-3 text-lg text-neutral-400'>

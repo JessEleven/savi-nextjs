@@ -42,7 +42,10 @@ export function GetFileName () {
     if (!id) return
 
     (async () => {
-      const getFiles = (from === 'favorite' ? getAllJsonFavorite : getAllJsonStorage)
+      const getFiles = ((from === 'favorite' || from === 'fav')
+        ? getAllJsonFavorite
+        : getAllJsonStorage
+      )
       const files = await getFiles()
       const file = files.find((item) => item.id === id)
       setFileName(file?.fileName ?? 'Unnamed')
