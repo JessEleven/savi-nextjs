@@ -2,8 +2,7 @@
 
 import Editor, { loader } from '@monaco-editor/react'
 import Link from 'next/link'
-import { LoaderIcon } from '../assets/dash-icons'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import EditorOptions from '../components-dash/editor-options'
 import { createJsonStorage } from '@/libs/api/json-storage'
 import { useRouter } from 'next/navigation'
@@ -16,6 +15,7 @@ import { downloadFile } from '@/utils/download'
 import { toast } from 'sonner'
 import { copyFile } from '@/utils/clipboard'
 import Text from '../components-dash/ui/text'
+import { SkeletonUpdate } from '../components-dash/ui/skeletons'
 
 export default function NewPage () {
   // const [isFocused, setIsFocused] = useState(false)
@@ -33,10 +33,15 @@ export default function NewPage () {
   })
   const editorRef = useRef(null)
   const router = useRouter()
+  const [loading, setLoading] = useState(true)
 
   const onSubmit = async (formData) => {
     const content = editorRef.current?.getValue()
     const parsed = JSON.parse(content)
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 2500)
 
     try {
       await createJsonStorage({
@@ -50,6 +55,7 @@ export default function NewPage () {
       // console.error('Invalid JSON:', error)
       toast.error('Invalid JSON or failed to create')
     }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -64,6 +70,9 @@ export default function NewPage () {
         }
       })
     })
+    setTimeout(() => {
+      setLoading(false)
+    }, 2500)
   }, [])
 
   const handleFormat = () => {
@@ -112,109 +121,113 @@ export default function NewPage () {
 
   return (
     <main className='mt-7 mb-10'>
-      <article className='card-container'>
-        <Text name='Create a new file' />
+      {loading && <SkeletonUpdate />}
+      {!loading && (
+        <article className='card-container'>
+          <Text name='Create a new file' />
 
-        <form onSubmit={handleSubmit(onSubmit)} className='mt-5 text-sm'>
-          <div className='flex flex-col relative'>
-            <label htmlFor='fileName'>File name</label>
-            <input
-              id='fileName'
-              type='text'
-              name='fileName'
-              className='mt-1.5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-[5px] px-4 py-1.5 font-normal'
-              placeholder='e.g. First file, New file...'
-              {...register('fileName')}
-            />
-            {errors.fileName && (
-              <p className='absolute top-16 text-rose-400'>{errors.fileName.message}</p>
-            )}
-          </div>
-
-          <div className='flex flex-col mt-7'>
-            <div className='flex items-center justify-between mb-2.5'>
-              <EditorOptions
-                handleFormat={handleFormat}
-                editorRef={editorRef}
-                handleFileDownload={handleFileDownload}
-                handleFileCopying={handleFileCopying}
+          <form onSubmit={handleSubmit(onSubmit)} className='mt-5 text-sm'>
+            <div className='flex flex-col relative'>
+              <label htmlFor='fileName'>File name</label>
+              <input
+                id='fileName'
+                type='text'
+                name='fileName'
+                className='mt-1.5 outline-none focus:border-slate-400 bg-transparent border border-neutral-600 rounded-[5px] px-4 py-1.5 font-normal'
+                placeholder='e.g. First file, New file...'
+                {...register('fileName')}
               />
-              <EditorOpDropdown
-                handleFormat={handleFormat}
-                editorRef={editorRef}
-                handleFileDownload={handleFileDownload}
-                handleFileCopying={handleFileCopying}
-              />
-              <UploadFile editorRef={editorRef} />
+              {errors.fileName && (
+                <p className='absolute top-16 text-rose-400'>{errors.fileName.message}</p>
+              )}
             </div>
 
-            <div className='relative rounded-md overflow-hidden'>
-              <Editor
-                name='fileContent'
-                onChange={(value) => {
-                  setValue('fileContent', value)
-                  trigger('fileContent')
-                }}
-                height='500px'
-                defaultLanguage='json'
-                theme='custom-vs-dark'
-                loading={<LoaderIcon className='animate-spin' />}
-                onMount={(editor) => {
-                  editorRef.current = editor
+            <div className='flex flex-col mt-7'>
+              <div className='flex items-center justify-between mb-2.5'>
+                <EditorOptions
+                  handleFormat={handleFormat}
+                  editorRef={editorRef}
+                  handleFileDownload={handleFileDownload}
+                  handleFileCopying={handleFileCopying}
+                />
+                <EditorOpDropdown
+                  handleFormat={handleFormat}
+                  editorRef={editorRef}
+                  handleFileDownload={handleFileDownload}
+                  handleFileCopying={handleFileCopying}
+                />
+                <UploadFile editorRef={editorRef} />
+              </div>
+
+              <div className='relative rounded-md overflow-hidden'>
+                <Editor
+                  name='fileContent'
+                  onChange={(value) => {
+                    setValue('fileContent', value)
+                    trigger('fileContent')
+                  }}
+                  height='500px'
+                  defaultLanguage='json'
+                  theme='custom-vs-dark'
+                  loading={null}
+                  onMount={(editor) => {
+                    editorRef.current = editor
                   // editor.onDidFocusEditorWidget(() => setIsFocused(true))
                   // editor.onDidBlurEditorWidget(() => setIsFocused(false))
-                }}
-                options={{
-                  minimap: { enabled: false },
-                  guides: {
-                    bracketPairs: false,
-                    highlightActiveBracketPair: false
-                  },
-                  matchBrackets: 'never',
-                  folding: true,
-                  automaticLayout: true,
-                  padding: { top: 22, bottom: 22 },
-                  renderWhitespace: 'selection',
-                  fontFamily: 'Consolas',
-                  fontLigatures: true,
-                  cursorBlinking: 'smooth',
-                  smoothScrolling: true,
-                  contextmenu: true,
-                  renderLineHighlight: 'line',
-                  tabSize: 2,
-                  fontSize: 14,
-                  lineHeight: 22,
-                  letterSpacing: 0.5,
-                  roundedSelection: true,
-                  scrollbar: {
-                    verticalScrollbarSize: 12,
-                    horizontalScrollbarSize: 12
-                  },
-                  scrollBeyondLastLine: false,
-                  renderLineHighlightOnlyWhenFocus: true
-                }}
-              />
+                  }}
+                  options={{
+                    minimap: { enabled: false },
+                    guides: {
+                      bracketPairs: false,
+                      highlightActiveBracketPair: false
+                    },
+                    matchBrackets: 'never',
+                    folding: true,
+                    automaticLayout: true,
+                    padding: { top: 22, bottom: 22 },
+                    renderWhitespace: 'selection',
+                    fontFamily: 'Consolas',
+                    fontLigatures: true,
+                    cursorBlinking: 'smooth',
+                    smoothScrolling: true,
+                    contextmenu: true,
+                    renderLineHighlight: 'line',
+                    tabSize: 2,
+                    fontSize: 14,
+                    lineHeight: 22,
+                    letterSpacing: 0.5,
+                    roundedSelection: true,
+                    scrollbar: {
+                      verticalScrollbarSize: 12,
+                      horizontalScrollbarSize: 12
+                    },
+                    scrollBeyondLastLine: false,
+                    renderLineHighlightOnlyWhenFocus: true
+                  }}
+                />
+              </div>
+              <input type='hidden' {...register('fileContent')} value={watch('fileContent') || ''} />
+
+              {errors.fileContent && (
+                <p className='absolute top-[782px] text-rose-400'>
+                  {errors.fileContent.message}
+                </p>
+              )}
             </div>
-            <input type='hidden' {...register('fileContent')} value={watch('fileContent') || ''} />
 
-            {errors.fileContent && (
-              <p className='absolute top-[782px] text-rose-400'>
-                {errors.fileContent.message}
-              </p>
-            )}
-          </div>
-
-          <div className='flex justify-end gap-x-2.5 mt-7'>
-            <Link href='/dash' className='block px-4 py-[7px] btn-border'>Cancel</Link>
-            <button
-              type='submit'
-              disabled={!isValid}
-              className='px-4 py-[8.5px] btn-bg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
-            >Save
-            </button>
-          </div>
-        </form>
-      </article>
+            <div className='flex justify-end gap-x-2.5 mt-7'>
+              <Link href='/dash' className='block px-4 py-[7px] btn-border'>Cancel</Link>
+              <button
+                type='submit'
+                disabled={!isValid}
+                className='px-4 py-[8.5px] btn-bg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </article>
+      )}
     </main>
   )
 }

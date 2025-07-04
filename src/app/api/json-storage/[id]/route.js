@@ -91,11 +91,13 @@ export async function PATCH (req, { params }) {
       }, { status: 400 })
     }
     const { fileName, fileContent } = await req.json()
+    const updatedAt = new Date()
 
     await db.update(jsonStorage)
       .set({
         fileName,
-        fileContent
+        fileContent,
+        updatedAt
       })
       .where(and(
         eq(jsonStorage.id, id),
