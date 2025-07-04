@@ -1,13 +1,15 @@
 import { auth } from '@/libs/auth'
 import { LogoutIcon } from '@/resources/assets/main-icons'
-import { headers } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 async function handleSignOut () {
   'use server'
-  await auth.api.signOut({
-    headers: await headers()
-  })
+  const headerList = await headers()
+  const cookieStore = await cookies()
+
+  await auth.api.signOut({ headers: headerList })
+  cookieStore.delete('better-auth.session_token')
   redirect('/sign-in')
 }
 
