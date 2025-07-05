@@ -1,4 +1,4 @@
-import AppLogo from './app-logo'
+import AppLogo from '../ui/app-logo'
 
 export default function Footer () {
   return (

@@ -14,6 +14,7 @@ import { toast } from 'sonner'
 import FileHeaderBar from './components-dash/ui/file-header-bar'
 import EmptyList from './components-dash/ui/empty-list'
 import { toggleFavorite } from '@/libs/api/json-favorite'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function DashPage () {
   const [data, setData] = useState([])
@@ -161,39 +162,50 @@ export default function DashPage () {
                         <DotsIcon />
                       </button>
 
-                      {(openById === item.id) && (
-                        <div className='absolute top-[41px] right-0 z-40 cursor-default' onClick={(e) => e.preventDefault()}>
-                          <div className='w-[100px] p-2.5 space-y-1.5 rounded-md border border-neutral-600 bg-neutral-800'>
-                            {/* Update an item */}
-                            <Link href={`/dash/${item.id}/edit`} className='block w-fit group'>
-                              <div className='flex items-center gap-x-1'>
-                                <EditIcon className='text-purple-500 md:text-current group-hover:text-purple-500 transition-colors duration-200 ease-in-out' />
-                                <span>Edit</span>
-                              </div>
-                            </Link>
-
-                            {/* Delete an item */}
-                            <button
-                              type='button'
-                              aria-label='Trash Icon'
-                              className='flex items-center gap-x-1 group cursor-pointer'
-                              onClick={() => {
-                                deleteJsonStorage({
-                                  id: item.id,
-                                  onSuccess: () => {
-                                    setData((prev) => prev.filter((storage) => storage.id !== item.id))
-                                    setOpenById(null)
-                                  }
-                                })
-                                toast.success('File deleted successfully')
-                              }}
+                      <AnimatePresence>
+                        {(openById === item.id) && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className='absolute top-[41px] right-0 z-40 cursor-default'
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <div
+                              className='w-[100px] p-2.5 space-y-1.5 rounded-md border border-neutral-600 bg-neutral-800'
                             >
-                              <TrashIcon className='text-rose-400 md:text-current group-hover:text-rose-400 transition-colors duration-200 ease-in-out' />
-                              <span>Delete</span>
-                            </button>
-                          </div>
-                        </div>
-                      )}
+                              {/* Update an item */}
+                              <Link href={`/dash/${item.id}/edit`} className='block w-fit group'>
+                                <div className='flex items-center gap-x-1'>
+                                  <EditIcon className='text-purple-500 md:text-current group-hover:text-purple-500 transition-colors duration-200 ease-in-out' />
+                                  <span>Edit</span>
+                                </div>
+                              </Link>
+
+                              {/* Delete an item */}
+                              <button
+                                type='button'
+                                aria-label='Trash Icon'
+                                className='flex items-center gap-x-1 group cursor-pointer'
+                                onClick={() => {
+                                  deleteJsonStorage({
+                                    id: item.id,
+                                    onSuccess: () => {
+                                      setData((prev) => prev.filter((storage) => storage.id !== item.id))
+                                      setOpenById(null)
+                                    }
+                                  })
+                                  toast.success('File deleted successfully')
+                                }}
+                              >
+                                <TrashIcon className='text-rose-400 md:text-current group-hover:text-rose-400 transition-colors duration-200 ease-in-out' />
+                                <span>Delete</span>
+                              </button>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 'use client'
 
+import Footer from '@/components/landing/footer'
 import AppLogo from '@/components/ui/app-logo'
-import Footer from '@/components/ui/footer'
 import { authClient } from '@/libs/auth-client'
 import { ArrowRight, GitHubIcon } from '@/resources/assets/main-icons'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ export default function SignInForm () {
   return (
     <main className='bg-[#292c2e]'>
       <div className='relative min-h-screen main-container flex flex-col items-center justify-center'>
-        <div className='w-full md:w-96'>
+        <div className='w-full md:w-96 animate-fade-up-once'>
           <div className='mx-5 md:mx-0'>
             <div className='flex justify-center mb-5'>
               <AppLogo iconSize={54} />
