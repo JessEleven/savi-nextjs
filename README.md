@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="./public/logo.svg" alt="Logo" width="36" height="36">
+  <h2 style="margin-top: -10px;">Savi</h2>
+</div>
 
-## Getting Started
+Savi is a simple and easy to use application. In addition to a favorites section and being able to download.
 
-First, run the development server:
+## Usage
+Visit <a href="https://savi-beta.vercel.app" target="_blank" >savi-beta.vercel.app</a> to access the hosted version.
+
+![Savi](https://res.cloudinary.com/dvj4oaqy5/image/upload/v1751741571/Savi-App_wc8jt8.png)
+
+## Tech Stack
+
+- React
+- Next.js
+- Tailwind CSS
+- Better Auth (Authentication)
+- Monaco editor for React
+- Framer Motion
+- Drizzle ORM
+- Neon Serverless
+- Vercel
+
+## Prerequisites
+
+- Node.js (22.13.1 or higher)
+- pnpm (preferred)
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/JessEleven/savi-nextjs.git
 ```
+```bash
+# Install dependencies
+pnpm install
+```
+```bash
+# Start the development server
+pnpm dev
+```
+## Screenshots
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Landing](https://res.cloudinary.com/dvj4oaqy5/image/upload/v1751742945/Savi-App-3_mrlrsd.png)
+![View file](https://res.cloudinary.com/dvj4oaqy5/image/upload/v1751743086/Savi-App-4_uhc8kp.png)
+![Create new file](https://res.cloudinary.com/dvj4oaqy5/image/upload/v1751741583/Savi-App-2_qgk9sa.png)
+![Favorite Files](https://res.cloudinary.com/dvj4oaqy5/image/upload/v1751743356/Savi-App-5_kojryd.png)
