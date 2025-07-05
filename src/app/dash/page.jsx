@@ -76,7 +76,7 @@ export default function DashPage () {
         >
           {data.map((item) => (
             <Link key={item.id} href={`/dash/${item.id}`} className='block'>
-              <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-stone-400 transition-colors duration-300 ease-in-out group'>
+              <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-stone-400 transition-colors duration-300 ease-in-out'>
                 <div className='flex items-center justify-between gap-x-5'>
                   {/* File content */}
                   <div className='flex flex-col space-y-1 truncate'>
@@ -172,13 +172,11 @@ export default function DashPage () {
                             className='absolute top-[41px] right-0 z-40 cursor-default'
                             onClick={(e) => e.preventDefault()}
                           >
-                            <div
-                              className='w-[100px] p-2.5 space-y-1.5 rounded-md border border-neutral-600 bg-neutral-800'
-                            >
+                            <div className='w-[114.5px] p-2.5 space-y-2 rounded-md border border-neutral-600 bg-neutral-800'>
                               {/* Update an item */}
-                              <Link href={`/dash/${item.id}/edit`} className='block w-fit group'>
-                                <div className='flex items-center gap-x-1'>
-                                  <EditIcon className='text-purple-500 md:text-current group-hover:text-purple-500 transition-colors duration-200 ease-in-out' />
+                              <Link href={`/dash/${item.id}/edit`} className='block w-fit'>
+                                <div className='flex items-center gap-x-1 group'>
+                                  <EditIcon className='text-purple-500 md:text-current md:group-hover:text-purple-500 transition-colors duration-200 ease-in-out' />
                                   <span>Edit</span>
                                 </div>
                               </Link>
@@ -187,7 +185,7 @@ export default function DashPage () {
                               <button
                                 type='button'
                                 aria-label='Trash Icon'
-                                className='flex items-center gap-x-1 group cursor-pointer'
+                                className='flex items-center gap-x-1 cursor-pointer group'
                                 onClick={() => {
                                   deleteJsonStorage({
                                     id: item.id,
@@ -199,7 +197,7 @@ export default function DashPage () {
                                   toast.success('File deleted successfully')
                                 }}
                               >
-                                <TrashIcon className='text-rose-400 md:text-current group-hover:text-rose-400 transition-colors duration-200 ease-in-out' />
+                                <TrashIcon className='text-rose-400 md:text-current md:group-hover:text-rose-400 transition-colors duration-200 ease-in-out' />
                                 <span>Delete</span>
                               </button>
                             </div>

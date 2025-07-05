@@ -4,6 +4,7 @@ import Clean from './ui/clean'
 import { DotsIcon } from '../assets/dash-icons'
 import DownloadFile from './ui/download-file'
 import Clipboard from './ui/clipboard'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function EditorOpDropdown ({
   handleFormat,
@@ -56,19 +57,27 @@ export default function EditorOpDropdown ({
         <DotsIcon />
       </button>
 
-      {open && (
-        <article className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-4 text-xl font-normal rounded-t-[10px] border-t border-t-neutral-600 bg-neutral-800'>
-          <h3 className='text-sm text-center text-neutral-400'>Editor options</h3>
-          <Format handleFormat={handleFormat} />
-          <Clean editorRef={editorRef} />
-          <Clipboard
-            editorRef={editorRef}
-            handleFileCopying={handleFileCopying}
-            responsiveMode
-          />
-          <DownloadFile handleFileDownload={handleFileDownload} responsiveMode />
-        </article>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className='fixed z-40 bottom-0 left-0 w-full p-5 space-y-4 text-xl font-normal rounded-t-[10px] border-t border-t-neutral-600 bg-neutral-800'
+          >
+            <h3 className='text-sm text-center text-neutral-400'>Editor options</h3>
+            <Format handleFormat={handleFormat} />
+            <Clean editorRef={editorRef} />
+            <Clipboard
+              editorRef={editorRef}
+              handleFileCopying={handleFileCopying}
+              responsiveMode
+            />
+            <DownloadFile handleFileDownload={handleFileDownload} responsiveMode />
+          </motion.article>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
