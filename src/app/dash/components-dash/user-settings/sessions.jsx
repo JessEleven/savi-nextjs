@@ -1,9 +1,9 @@
-import dayjs from 'dayjs'
 import GetSessionStatus from '../ui/get-session-status'
 import { auth } from '@/libs/auth'
 import { headers } from 'next/headers'
 import { BroadcastIcon } from '../../assets/dash-icons'
 import { getGeoFromIP } from '@/libs/geo'
+import { dateFormat } from '@/utils/date-format'
 
 export default async function Sessions () {
   const { session: currentSession } = await auth.api.getSession({
@@ -65,7 +65,7 @@ export default async function Sessions () {
             </p>
 
             <p className='text-sm'>
-              Expires at: {dayjs(s.expiresAt).format('MMMM DD, YYYY • hh:mm a')}
+              Expires at: {dateFormat(s.expiresAt)}
             </p>
           </div>
         ))}

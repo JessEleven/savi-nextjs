@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { deleteJsonStorage, getAllJsonStorage } from '@/libs/api/json-storage'
 import Link from 'next/link'
-import dayjs from 'dayjs'
 import {
   ChevronLeft, ChevronRight, DotsIcon, EditIcon,
   FocusIcon, PointIcon, StarIcon, TrashIcon
@@ -15,6 +14,7 @@ import FileHeaderBar from './components-dash/ui/file-header-bar'
 import EmptyList from './components-dash/ui/empty-list'
 import { toggleFavorite } from '@/libs/api/json-favorite'
 import { motion, AnimatePresence } from 'framer-motion'
+import { dateFormat } from '@/utils/date-format'
 
 export default function DashPage () {
   const [data, setData] = useState([])
@@ -113,13 +113,13 @@ export default function DashPage () {
                         ? (
                           <h3 className='truncate text-sm text-neutral-400'>
                             {item.updatedAt !== item.createdAt && item.id
-                              ? dayjs(item.updatedAt).format('MMMM DD, YYYY • hh:mm a')
+                              ? dateFormat(item.updatedAt)
                               : 'File not updated'}
                           </h3>
                           )
                         : (
                           <h3 className='truncate text-sm text-neutral-400'>
-                            {dayjs(item.createdAt).format('MMMM DD, YYYY • hh:mm a')}
+                            {dateFormat(item.createdAt)}
                           </h3>
                           )}
                     </div>

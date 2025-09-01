@@ -3,7 +3,7 @@
 
 /* For main Layout - /dash/loyout.jsx */
 .main-container {
-  @apply w-full mx-auto md:w-[600px] lg:w-[700px] xl:w-[1000px] 2xl:mx-[1200px]
+  @apply w-full mx-auto md:w-[600px] lg:w-[700px] xl:w-[1000px] 2xl:w-[1200px]
 }
 
 /* For registration */

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import dayjs from 'dayjs'
 import {
   ChevronLeft, ChevronRight, EditIcon,
   FocusIcon, PointIcon, StarIcon
@@ -13,6 +12,7 @@ import { toast } from 'sonner'
 import FileHeaderBar from '../components-dash/ui/file-header-bar'
 import EmptyList from '../components-dash/ui/empty-list'
 import { getAllJsonFavorite, toggleFavorite } from '@/libs/api/json-favorite'
+import { dateFormat } from '@/utils/date-format'
 
 export default function FavoritePage () {
   const [data, setData] = useState([])
@@ -110,13 +110,13 @@ export default function FavoritePage () {
                         ? (
                           <h3 className='truncate text-sm text-neutral-400'>
                             {item.updatedAt !== item.createdAt && item.id
-                              ? dayjs(item.updatedAt).format('MMMM DD, YYYY • hh:mm a')
+                              ? dateFormat(item.updatedAt)
                               : 'Favorite file not updated'}
                           </h3>
                           )
                         : (
                           <h3 className='truncate text-sm text-neutral-400'>
-                            {dayjs(item.createdAt).format('MMMM DD, YYYY • hh:mm a')}
+                            {dateFormat(item.createdAt)}
                           </h3>
                           )}
                     </div>

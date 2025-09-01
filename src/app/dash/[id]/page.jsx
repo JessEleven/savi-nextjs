@@ -3,7 +3,6 @@
 import Editor from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import ErrorFetching from '../components-dash/ui/error-fetching'
-import dayjs from 'dayjs'
 import { downloadFile } from '@/utils/download'
 import DownloadFile from '../components-dash/ui/download-file'
 import Clipboard from '../components-dash/ui/clipboard'
@@ -12,6 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import { getJsonStorageById } from '@/libs/api/json-storage'
 import { getJsonFavoriteById } from '@/libs/api/json-favorite'
 import { SkeletonById } from '../components-dash/ui/skeletons'
+import { dateFormat } from '@/utils/date-format'
 
 export default function GetPageId ({ params }) {
   const { id } = params
@@ -58,7 +58,7 @@ export default function GetPageId ({ params }) {
           <div className='block md:flex md:items-center justify-between mb-5 truncate'>
             <h3 className='text-2xl truncate font-medium'>{data?.fileName}</h3>
             <h3 className='text-sm text-neutral-400'>
-              {dayjs(data?.createdAt).format('MMMM DD, YYYY • hh:mm a')}
+              {dateFormat(data?.createdAt)}
             </h3>
           </div>
 
