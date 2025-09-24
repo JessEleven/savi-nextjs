@@ -1,8 +1,8 @@
-import dayjs from 'dayjs'
 import { headers } from 'next/headers'
 import UserAvatar from '../ui/user-avatar'
 import { auth } from '@/libs/auth'
 import { UserCircleIcon } from '../../assets/dash-icons'
+import { dateFormat, dateISO } from '@/utils/date-format'
 
 export default async function Profile () {
   const { user } = await auth.api.getSession({
@@ -24,9 +24,9 @@ export default async function Profile () {
         <UserAvatar />
       </div>
 
-      <h3 className='mt-2.5 text-sm truncate'>
-        Account created at {dayjs(user?.createdAt).format('MMMM DD, YYYY • hh:mm a')}
-      </h3>
+      <time dateTime={dateISO(user?.createdAt)} className='mt-2.5 text-sm truncate'>
+        Account created at {dateFormat(user?.createdAt)}
+      </time>
     </>
   )
 }

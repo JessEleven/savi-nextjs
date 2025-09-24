@@ -11,7 +11,9 @@ import { useSearchParams } from 'next/navigation'
 import { getJsonStorageById } from '@/libs/api/json-storage'
 import { getJsonFavoriteById } from '@/libs/api/json-favorite'
 import { SkeletonById } from '../components-dash/ui/skeletons'
-import { dateFormat } from '@/utils/date-format'
+import { dateFormat, dateISO } from '@/utils/date-format'
+import { EditIcon } from '../assets/dash-icons'
+import Link from 'next/link'
 
 export default function GetPageId ({ params }) {
   const { id } = params
@@ -56,15 +58,24 @@ export default function GetPageId ({ params }) {
         <div className='flex flex-col'>
           {/* File content */}
           <div className='block md:flex md:items-center justify-between mb-5 truncate'>
-            <h3 className='text-2xl truncate font-medium'>{data?.fileName}</h3>
-            <h3 className='text-sm text-neutral-400'>
+            <h3 className='text-2xl font-medium truncate'>{data?.fileName}</h3>
+            <time dateTime={dateISO(data?.createdAt)} className='text-sm text-neutral-400'>
               {dateFormat(data?.createdAt)}
-            </h3>
+            </time>
           </div>
 
-          <div className='flex items-center gap-x-2.5'>
-            <Clipboard handleFileCopying={handleFileCopying} />
-            <DownloadFile handleFileDownload={handleFileDownload} />
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-x-2.5'>
+              <Clipboard handleFileCopying={handleFileCopying} />
+              <DownloadFile handleFileDownload={handleFileDownload} />
+            </div>
+
+            <Link href={from === 'favorite' ? `/dash/${id}/edit?from=fav` : `/dash/${id}/edit`} className='block px-4 py-2 rounded-[5px] text-sm bg-purple-500 hover:bg-purple-500/75 transition-colors duration-200 ease-in-out leading-3.5'>
+              <div className='flex items-center gap-x-1'>
+                <EditIcon />
+                <span>Edit file</span>
+              </div>
+            </Link>
           </div>
 
           {/* File content */}

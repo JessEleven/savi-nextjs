@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { downloadFile } from '@/utils/download'
 import { toast } from 'sonner'
 import { copyFile } from '@/utils/clipboard'
-import Text from '../../components-dash/ui/text'
+import SectionTitle from '../../components-dash/ui/section-title'
 import { SkeletonUpdate } from '../../components-dash/ui/skeletons'
 
 export default function EditPage () {
@@ -148,7 +148,7 @@ export default function EditPage () {
       {loading && <SkeletonUpdate />}
       {!loading && (
         <article className='card-container'>
-          <Text name='Update JSON file' />
+          <SectionTitle name='Update JSON file' />
 
           <form onSubmit={handleSubmit(onSubmit)} className='mt-5 text-sm'>
             <div className='flex flex-col relative'>

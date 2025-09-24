@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# It is in development
+/src/app/dash/components-dash/search-files.jsx

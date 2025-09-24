@@ -12,7 +12,7 @@ import { toast } from 'sonner'
 import FileHeaderBar from '../components-dash/ui/file-header-bar'
 import EmptyList from '../components-dash/ui/empty-list'
 import { getAllJsonFavorite, toggleFavorite } from '@/libs/api/json-favorite'
-import { dateFormat } from '@/utils/date-format'
+import { dateFormat, dateISO } from '@/utils/date-format'
 
 export default function FavoritePage () {
   const [data, setData] = useState([])
@@ -108,16 +108,16 @@ export default function FavoritePage () {
 
                       {hasUpdated.includes(item.id)
                         ? (
-                          <h3 className='truncate text-sm text-neutral-400'>
+                          <time dateTime={dateISO(item.updatedAt)} className='truncate text-sm text-neutral-400'>
                             {item.updatedAt !== item.createdAt && item.id
                               ? dateFormat(item.updatedAt)
                               : 'Favorite file not updated'}
-                          </h3>
+                          </time>
                           )
                         : (
-                          <h3 className='truncate text-sm text-neutral-400'>
+                          <time dateTime={dateISO(item.createdAt)} className='truncate text-sm text-neutral-400'>
                             {dateFormat(item.createdAt)}
-                          </h3>
+                          </time>
                           )}
                     </div>
                   </div>

@@ -14,7 +14,7 @@ import FileHeaderBar from './components-dash/ui/file-header-bar'
 import EmptyList from './components-dash/ui/empty-list'
 import { toggleFavorite } from '@/libs/api/json-favorite'
 import { motion, AnimatePresence } from 'framer-motion'
-import { dateFormat } from '@/utils/date-format'
+import { dateFormat, dateISO } from '@/utils/date-format'
 
 export default function DashPage () {
   const [data, setData] = useState([])
@@ -76,7 +76,7 @@ export default function DashPage () {
         >
           {data.map((item) => (
             <Link key={item.id} href={`/dash/${item.id}`} className='block'>
-              <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-stone-400 transition-colors duration-300 ease-in-out'>
+              <article className='px-5 py-2.5 rounded-lg border border-neutral-600 hover:border-stone-400 transition-colors duration-300 ease-in-out group'>
                 <div className='flex items-center justify-between gap-x-5'>
                   {/* File content */}
                   <div className='flex flex-col space-y-1 truncate'>
@@ -111,16 +111,16 @@ export default function DashPage () {
 
                       {hasUpdated.includes(item.id)
                         ? (
-                          <h3 className='truncate text-sm text-neutral-400'>
+                          <time dateTime={dateISO(item.updatedAt)} className='truncate text-sm text-neutral-400'>
                             {item.updatedAt !== item.createdAt && item.id
                               ? dateFormat(item.updatedAt)
                               : 'File not updated'}
-                          </h3>
+                          </time>
                           )
                         : (
-                          <h3 className='truncate text-sm text-neutral-400'>
+                          <time dateTime={dateISO(item.createdAt)} className='truncate text-sm text-neutral-400'>
                             {dateFormat(item.createdAt)}
-                          </h3>
+                          </time>
                           )}
                     </div>
                   </div>

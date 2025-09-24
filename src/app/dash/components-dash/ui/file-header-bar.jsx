@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Text from './text'
+import SectionTitle from './section-title'
 import { PlusIcon, RefreshIcon, StarIcon } from '../../assets/dash-icons'
 import { usePathname } from 'next/navigation'
 
@@ -14,7 +14,7 @@ export default function FileHeaderBar ({
 
   return (
     <div className='flex items-center justify-between mb-7'>
-      <Text name={pathname === '/dash' ? 'Your files' : 'Your favorites'} />
+      <SectionTitle name={pathname === '/dash' ? 'Your files' : 'Your favorites'} />
 
       <div className='flex items-center justify-between gap-x-2.5'>
         {hasItems && (

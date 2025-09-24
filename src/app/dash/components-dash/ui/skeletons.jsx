@@ -28,9 +28,13 @@ export function SkeletonById () {
         <div className='w-44 h-4 mt-[5px] md:mt-0 rounded-sm bg-neutral-700/70' />
       </div>
 
-      <div className='flex items-center gap-x-2.5'>
-        <div className='w-[76px] h-8 rounded-[5px] bg-neutral-700/70' />
-        <div className='w-32 h-8 rounded-[5px] bg-neutral-700/70' />
+      <div className='flex items-center justify-between'>
+        <div className='flex items-center gap-x-2.5'>
+          <div className='w-[76px] h-8 rounded-[5px] bg-neutral-700/70' />
+          <div className='w-32 h-8 rounded-[5px] bg-neutral-700/70' />
+        </div>
+
+        <div className='w-[98px] h-8 rounded-[5px] bg-neutral-700/70' />
       </div>
 
       <div className='h-[500px] mt-2.5 rounded-lg bg-neutral-700/70' />
